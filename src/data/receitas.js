@@ -1,0 +1,125 @@
+const U = 'https://colamisul.inoveweb.com.br/wp-content/uploads/';
+
+// Ordem igual à listagem /receitas/ do site atual
+module.exports = [
+  {
+    slug: 'misto-quente-de-forno-receita-da-anginha',
+    nome: 'Misto quente de forno “da Anginha”',
+    tituloCompleto: 'Misto quente de forno Receita “da Anginha”',
+    thumb: U + '2026/06/Misto-quente-de-forno-1024x576.jpg', img: U + '2026/06/Misto-quente-de-forno.jpg',
+    meta: { tempo: '50min', rendimento: '8 porções' },
+    ingredientes: [
+      { t: 'Creme branco', items: ['2 colheres de manteiga Colamisul', '2 colheres de farinha de trigo', '4 xícaras de leite Colamisul', '½ xícara de creme de leite 100 ml', '½ copo de requeijão Colamisul'] },
+      { t: 'Massa', items: ['1 pacote de pão de fôrma (sem casca)', '300 g de presunto', '400 g de queijo mussarela Colamisul'] },
+    ],
+    preparo: [
+      { t: 'Creme branco', steps: [
+        'Coloque a manteiga Colamisul em uma panela e deixe a manteiga derreter, em seguida acrescente a farinha de trigo e mexa até que ela esteja dissolvida (deixe “fritar” um pouco a farinha, para não ficar com gosto);',
+        'Acrescente o leite Colamisul e mexa bem, junte o creme de leite e mexa até engrossar;',
+        'Quando começar a ferver, abaixe o fogo e deixe cozinhar;',
+        'Quando o creme de leite estiver pronto, acrescente o requeijão Colamisul e mexa para dissolver.',
+      ]},
+      { t: 'Montagem', steps: [
+        'Pegue um refratário de sua preferência, unte com manteiga Colamisul e comece a montar;',
+        'Faça uma camada de creme branco e uma camada de pão (sempre arrumando, para não ficar espaço vazio), coloque uma camada de queijo mussarela Colamisul fatiado, por cima uma camada de presunto;',
+        'Repita o processo, creme branco, pão, queijo mussarela Colamisul e presunto;',
+        'Por último coloque mais uma camada de creme branco, um pouco de queijo parmesão ralado e leve ao forno para gratinar.',
+      ]},
+    ],
+    info: ['Obs.: O presunto pode ser substituído por peito de peru defumado.', 'Tempo de preparo: 50min // Rendimento: 8 porções'],
+  },
+  {
+    slug: 'frango-com-creme-de-leite-e-requeijao',
+    nome: 'Frango com creme de leite e requeijão',
+    thumb: U + '2026/06/Frango-com-creme-de-leite-e-requeijao-1024x576.jpg', img: U + '2026/06/Frango-com-creme-de-leite-e-requeijao.jpg',
+    ingredientes: [{ items: ['1 kg de peito de frango (cortado em cubinhos)', '2 batatas médias cozidas', '1 copo de requeijão cremoso Colamisul', '1 caixinha de creme de leite', '200 g de queijo mussarela Colamisul fatiada', '½ pacote de batata palha (para decorar)', 'Sal e tempero a gosto para o frango'] }],
+    preparo: [{ steps: [
+      'Em uma panela média refogue o frango com os ingredientes de sua preferência (reserve);',
+      'Em uma panela média cozinhe as batatas;',
+      'Bata no liquidificador o creme de leite, o requeijão cremoso Colamisul e as batatas cozidas;',
+      'Pegue o frango já refogado e coloque em um recipiente que vai ao forno',
+      'Jogue o creme já batido por cima do frango e cubra com o queijo mussarela Colamisul e a batata palha;',
+      'Se preferir pode colocar primeiro a batata palha por cima do creme e depois o queijo mussarela Colamisul;',
+      'Leve ao forno pré-aquecido, até dourar.',
+    ]}],
+  },
+  {
+    slug: 'pave-rapido-de-doce-de-leite',
+    nome: 'Pavê rápido de doce de leite',
+    thumb: U + '2026/06/Pave-rapido-de-doce-de-leite-1024x576.jpg', img: U + '2026/06/Pave-rapido-de-doce-de-leite.jpg',
+    ingredientes: [
+      { t: 'Creme branco', items: ['1 lata de leite condensado', '1 colher bem cheia de manteiga com sal Colamisul', '2 caixinhas de creme de leite'] },
+      { t: 'Cobertura', items: ['200 g de doce de leite pastoso Colamisul', '100 g de chocolate branco'] },
+      { t: 'Recheio', items: ['2 pacotes de biscoito de maizena (piraquê que fica mais gostoso)', 'Quanto baste de leite Colamisul para molhar os biscoitos'] },
+    ],
+    preparo: [
+      { t: 'Creme branco', steps: ['Em uma panela, coloque o leite condensado e a manteiga com sal Colamisul', 'Vá mexendo até ficar parecido com um brigadeiro branco', 'Apague o fogo e acrescente o creme de leite, mexendo sem parar'] },
+      { t: 'Montagem', steps: ['Vá molhando os biscoitos e fazendo camadas.', 'Intercale as camadas de biscoitos com as de creme.', 'Por último, coloque uma camada de biscoito.'] },
+      { t: 'Cobertura', steps: ['Coloque o doce de leite em uma panela para amolecer um pouco.', 'Forre o pavê com o doce de leite e coloque raspas de chocolate branco para decorar.'] },
+    ],
+  },
+  {
+    slug: 'picole-de-iogurte-de-morango-colamisul',
+    nome: 'Picolé de Iogurte de Morango Colamisul',
+    thumb: U + '2023/12/picole-iogurte.jpg', img: U + '2023/12/picole-iogurte.jpg',
+    ingredientes: [{ items: ['1 garrafa de iogurte de morango Colamisul', '1 caixa de morango picado', '1 lata de creme de leite'] }],
+    preparo: [{ steps: [
+      'Em um liquidificador bata todos os ingredientes suavemente, para que fique com pedaços.',
+      'Despeje a mistura em forminhas de picolés ou copinhos de café com palito de sorvete e cobertos com papel alumínio.',
+      'Leve ao freezer por cerca de 4 horas.',
+      'Sirva.',
+    ]}],
+  },
+  {
+    slug: 'strogonoff-de-frango',
+    nome: 'Strogonoff de Frango',
+    thumb: U + '2023/12/strogonoff.jpg', img: U + '2023/12/strogonoff.jpg',
+    ingredientes: [{ items: ['1kg de filé de frango cortado em cubos', 'Suco de 2 limões', '1 litro de água fervente', '1 fio de óleo', '1 cebola picada', '1 colher de sopa de alho picado', 'Sal a gosto', '2 colheres de sopa de extrato de tomate', '2 caixinhas de creme de leite', '200 gramas de ketchup', '100 gramas de mostarda', 'Requeijão cremoso Colamisul', '90 gramas de champignon em conserva fatiado e drenado'] }],
+    preparo: [{ steps: [
+      'Em uma tigela, misture os cubos de frango com o suco de limão e em seguida, coloque um pouco de água fervente para limpar o frango e escorra.',
+      'Em uma panela, em fogo médio, coloque 1 fio de óleo e refogue a cebola e o alho. Acrescente o frango, o sal e refogue mais um pouco, por cerca de 5 minutos.',
+      'Junte o extrato de tomate, o creme de leite, o ketchup, a mostarda e misture.',
+      'Acrescente o requeijão cremoso Colamisul e cozinhe por 5 minutos.',
+      'Para finalizar, adicione o champignon, mexa, apague o fogo e sirva com arroz e batata frita.',
+    ]}],
+    fonte: 'https://receitas.globo.com/receitas-da-tv/e-de-casa/estrogonofe-de-frango-a71a9d1d-6869-47c3-b1ca-c72a0eee5a01.ghtml',
+  },
+  {
+    slug: 'omelete-de-queijo-prato-colamisul',
+    nome: 'Omelete de Queijo Prato Colamisul',
+    thumb: U + '2023/12/omelete-queijo.jpg', img: U + '2023/12/omelete-queijo.jpg',
+    ingredientes: [{ items: ['3 ovos', '3 colheres de sopa de leite Colamisul', 'Queijo prato Colamisul a gosto', '1 colher de chá de manteiga Colamisul', '3 colheres de farinha de trigo', 'Sal a gosto'] }],
+    preparo: [{ steps: [
+      'Em uma tigela adicione os ovos, a farinha de trigo, o sal e bata bem.',
+      'Aqueça uma frigideira antiaderente em fogo médio, quando estiver quente, unte o fundo com manteiga Colamisul e adicione a mistura.',
+      'Em seguida, coloque o queijo prato Colamisul sobre toda a superfície da omelete.',
+      'Frite dos dois lados e sirva quente.',
+    ]}],
+    fonte: 'https://www.tudogostoso.com.br/receita/105354-omelete-de-queijo.html',
+  },
+  {
+    slug: 'bowl-de-iogurte-de-flocos-colamisul',
+    nome: 'Bowl de Iogurte de Flocos Colamisul',
+    thumb: U + '2023/12/Bowl-Iogurte.jpg', img: U + '2023/12/Bowl-Iogurte.jpg',
+    ingredientes: [{ items: ['1 copo de iogurte de flocos Colamisul', '1 xícara de chá de frutas de sua preferência picadas', '2 colheres de sopa de granola'] }],
+    preparo: [{ steps: ['Coloque em um bowl e decore com as frutas.', 'Finalize com a granola.'] }],
+    fonte: 'https://www.receitasnestle.com.br/receitas/bowl-de-iogurte-e-frutas',
+  },
+  {
+    slug: 'arroz-cremoso',
+    nome: 'Arroz Cremoso',
+    thumb: U + '2023/12/arroz-cremoso.jpg', img: U + '2023/12/arroz-cremoso.jpg',
+    ingredientes: [{ items: ['5 xícaras de chá de arroz cozido', '½ xícara de chá de uva passa (opcional)', '1 unidade de cenoura ralada', '1 lata de milho escorrida', '¾ xícaras de chá de leite Colamisul', '1 colher de sopa de manteiga Colamisul', '1 copo de requeijão Colamisul', '1 xícara de chá de queijo parmesão ralado', '½ xícara de chá de salsa (ou salsinha) picada', 'Sal a gosto', 'Pimenta-do-reino a gosto'] }],
+    preparo: [{ steps: [
+      'Misture o arroz cozido, as uvas passas, a cenoura ralada e o milho. Depois, coloque em um refratário untado com manteiga Colamisul e reserve.',
+      'No liquidificador, adicione o leite Colamisul, a manteiga Colamisul, o requeijão Colamisul, o queijo parmesão ralado, o sal e a pimenta-do-reino.',
+      'Bata tudo até obter uma mistura homogênea.',
+      'Acrescente a salsa picada à mistura do liquidificador e mexa bem.',
+      'Despeje essa mistura cremosa sobre a camada de arroz no refratário.',
+      'Leve ao forno preaquecido a 200ºC por cerca de 30 minutos, ou até que fique dourado por cima.',
+      'Retire do forno e sirva imediatamente.',
+    ]}],
+    info: ['Dica: misture os legumes de sua preferência.'],
+    fonte: 'https://www.guiadasemana.com.br/receitas/galeria/receitas-com-requeijao',
+  },
+];
