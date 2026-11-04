@@ -1,17 +1,20 @@
 #!/usr/bin/env node
-/* Gera o site estático da Colamisul em /dist
+/* Gera o site estático da Colamisul na raiz do repositório (pasta acima de _fonte/)
    Uso:
-     node build.js            -> URLs limpas (/produtos/) para publicar em servidor
-     node build.js --relative -> links relativos com index.html (abre direto do disco)
+     node _fonte/build.js            -> links relativos: funciona no GitHub Pages e abrindo do disco
+     node _fonte/build.js --absolute -> URLs limpas (/produtos/) para um servidor na raiz do domínio
 */
 const fs = require('fs');
 const path = require('path');
 
-const RELATIVE = process.argv.includes('--relative');
-// Prefixo para hospedar numa subpasta (ex.: GitHub Pages em /Colamisul). Vazio = raiz do domínio.
+const RELATIVE = !process.argv.includes('--absolute');
+// Prefixo para hospedar numa subpasta com --absolute (ex.: /Colamisul). Vazio = raiz do domínio.
 const BASE = (process.env.BASE_PATH || '').replace(/\/+$/, '');
-const OUT = path.join(__dirname, 'dist');
+const OUT = path.join(__dirname, '..');
 const SRC = path.join(__dirname, 'src');
+// Lista do que o build escreveu na raiz, para apagar só isso no próximo build
+const MANIFEST = path.join(__dirname, '.gerados.json');
+const PROTEGIDOS = new Set(['_fonte', '.git', '.github', 'node_modules', 'README.md', 'package.json', 'package-lock.json', '.gitignore']);
 
 const D = require('./src/data/site');
 const PRODUTOS = require('./src/data/produtos');
@@ -574,7 +577,10 @@ ${instagramBand()}`,
 
 /* ---------------- Escrita ---------------- */
 function write(file, content) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, content); }
-fs.rmSync(OUT, { recursive: true, force: true });
+// Apaga só o que o build anterior gerou (nunca _fonte, .git, README etc.)
+const anteriores = fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, 'utf8')) : [];
+for (const nome of anteriores) if (!PROTEGIDOS.has(nome) && !nome.includes('/') && !nome.includes('\\')) fs.rmSync(path.join(OUT, nome), { recursive: true, force: true });
+const gerados = new Set(['assets', '.htaccess', 'sitemap.xml', '.nojekyll']);
 
 for (const p of pages) {
   const depthPath = p.file ? '' : p.route;
@@ -583,6 +589,9 @@ for (const p of pages) {
   const body = p.body();
   const out = page({ title: p.title, desc: p.desc, active: p.active, depthPath, body });
   const file = p.file ? path.join(OUT, p.file) : path.join(OUT, p.route, 'index.html');
+  const topo = path.relative(OUT, file).split(path.sep)[0];
+  if (PROTEGIDOS.has(topo)) throw new Error('rota usaria uma pasta protegida: ' + topo);
+  gerados.add(topo);
   write(file, out);
 }
 write(path.join(OUT, 'assets/css/grid.css'), gridCSS());
@@ -600,4 +609,8 @@ write(path.join(OUT, '.htaccess'), `ErrorDocument 404 /404.html\n${redirects.joi
 // Sitemap
 write(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.filter(p => !p.file).map(p => `  <url><loc>https://colamisul.coop.br${p.route}</loc></url>`).join('\n')}\n</urlset>\n`);
 
-console.log(`✔ ${pages.length} páginas geradas em dist/ (${RELATIVE ? 'links relativos' : 'URLs limpas'})`);
+// Sem Jekyll no GitHub Pages (senão pastas com "_", como _receitas, somem)
+write(path.join(OUT, '.nojekyll'), '');
+fs.writeFileSync(MANIFEST, JSON.stringify([...gerados].sort(), null, 2) + '\n');
+
+console.log(`✔ ${pages.length} páginas geradas na raiz (${RELATIVE ? 'links relativos' : 'URLs limpas'})`);

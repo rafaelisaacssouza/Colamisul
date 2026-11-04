@@ -2,11 +2,11 @@
   "name": "colamisul-site",
   "version": "1.0.0",
   "private": true,
-  "description": "Site estático da Colamisul em HTML/CSS/JS puro com grid de 12 colunas",
+  "description": "Site estático da Colamisul. O site pronto fica na raiz; a fonte em _fonte/.",
   "scripts": {
-    "build": "node build.js",
-    "build:local": "node build.js --relative",
-    "dev": "node build.js && npx serve dist"
+    "build": "node _fonte/build.js",
+    "build:servidor": "node _fonte/build.js --absolute",
+    "dev": "node _fonte/build.js && npx serve ."
   },
   "devDependencies": {
     "serve": "^14.2.4"

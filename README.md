@@ -3,19 +3,19 @@
 Recriação completa do site com os mesmos textos e imagens, sobre um grid de 12 colunas.
 
 ## Estrutura
-- `src/data/` — todo o conteúdo (páginas, 13 produtos com tabela nutricional, 8 receitas, 20 presidentes, 4 informativos, notícia, política)
-- `src/assets/css/style.css` — estilos e componentes
-- `src/assets/js/main.js` — menu, dropdown, filtros, formulário, smooth scroll (Lenis) e animações (GSAP + ScrollTrigger)
-- `src/assets/vendor/` — Lenis 1.1.13 e GSAP 3.12.5 servidos localmente
-- `src/assets/img/` — logo (texto verde p/ fundo claro, branca p/ fundo escuro) e selo Coop
-- `src/assets/fonts/` — fonte Brume (local, evita bloqueio de CORS)
-- `build.js` — gera `dist/` (e o `grid.css`)
-- `dist/` — site pronto para subir
+- **Raiz** — o site pronto (index.html, páginas, assets/). É o que o GitHub Pages publica direto da branch main.
+- `_fonte/src/data/` — todo o conteúdo (páginas, produtos, receitas, presidentes, informativos, notícia, política)
+- `_fonte/src/assets/` — CSS, JS, fontes, logos, bibliotecas (Lenis, GSAP) e imagens em `uploads/`
+- `_fonte/build.js` — gera o site na raiz. Apaga só o que ele mesmo gerou (lista em `_fonte/.gerados.json`).
+
+**Não edite os HTML da raiz à mão:** altere `_fonte/` e rode `npm run build`.
 
 ## Comandos
-- `npm run build` → URLs limpas (`/produtos/`), para servidor
-- `npm run build:local` → links relativos, abre direto do disco
+- `npm run build` → gera o site na raiz com links relativos (GitHub Pages e abrir direto do disco)
+- `npm run build:servidor` → URLs limpas (`/produtos/`) para servidor na raiz do domínio
 - `npm run dev` → build + servidor local
+
+Para publicar: `npm run build`, commit e push.
 
 ## Grid
 | Faixa | Colunas | Gutter | Margem |
@@ -27,7 +27,7 @@ Recriação completa do site com os mesmos textos e imagens, sobre um grid de 12
 `<div class="grid"><div class="s-4 m-4 l-6 l-start-7">…</div></div>` — `s-*` mobile, `m-*` tablet, `l-*` desktop, `*-start-N` coluna inicial. Sem classe = linha inteira. Adicione `?grid` na URL para ver a grade sobreposta.
 
 ## Pendências
-- Logo, selo e fonte Brume já são locais. As demais imagens ainda apontam para `colamisul.inoveweb.com.br/wp-content/uploads/` — baixar para `assets/img` antes de desligar o WordPress.
+- Imagens são locais (_fonte/src/assets/uploads). Os 4 PDFs dos informativos ainda vêm do servidor antigo (inoveweb), por serem grandes demais (142 MB).
 - Formulário abre o e-mail (mailto). Ligar a um backend/serviço de formulário se quiser envio direto.
 - `.htaccess` redireciona as URLs antigas de `/_produtos/`, `/_presidente/` e `/informativos/`.
 
