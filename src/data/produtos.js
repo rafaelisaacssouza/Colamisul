@@ -1,4 +1,4 @@
-const U = 'https://colamisul.inoveweb.com.br/wp-content/uploads/';
+const U = '/assets/uploads/'; // imagens baixadas do site antigo (src/assets/uploads)
 const FOOT = '*Percentual de valores diários fornecidos pela porção.';
 const PESAR = 'OBS: Deve ser pesado na presença do consumidor.';
 

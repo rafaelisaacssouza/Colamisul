@@ -90,7 +90,7 @@ const wave = (fill, pos = 'top', bg = 'transparent') => `<svg class="wave wave--
   : 'M0 0v30c120 18 240 26 360 18s240-30 360-26 240 28 360 30 240-14 360-22V0z'}"/></svg>`;
 
 const btn = (label, url, cls = 'btn--primary') => `<a class="btn ${cls}" href="${href(url)}">${esc(label)} ${I.arrow}</a>`;
-const img = (src, alt = '', attrs = '') => `<img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async" ${attrs}>`;
+const img = (src, alt = '', attrs = '') => `<img src="${href(src)}" alt="${esc(alt)}" loading="lazy" decoding="async" ${attrs}>`;
 
 /* ---------------- Layout ---------------- */
 function navDesktop(active) {
@@ -192,7 +192,7 @@ const crumbs = list => `<ol class="breadcrumb">${list.map(([l, u]) => u ? `<li><
 // Banner original (a arte já vem na imagem) + bloco de título centralizado abaixo
 const banner = (image, video) => video
   ? `<section class="banner banner--video"><iframe src="https://www.youtube-nocookie.com/embed/${video}?autoplay=1&mute=1&loop=1&playlist=${video}&controls=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&rel=0&modestbranding=1" title="Vídeo institucional Colamisul" allow="autoplay; encrypted-media" tabindex="-1"></iframe></section>`
-  : `<section class="banner"><img src="${image}" alt="" fetchpriority="high"></section>`;
+  : `<section class="banner"><img src="${href(image)}" alt="" fetchpriority="high"></section>`;
 
 function pageHero({ title, eyebrow, lead, image, video, trail, bg = '', hideTitle = false }) {
   return `${banner(image, video)}
@@ -282,7 +282,7 @@ add('/', {
   title: '', active: '/',
   body: () => `
 <section class="hero">
-  <picture><source media="(max-width: 767px)" srcset="${B.home.mobile}"><img src="${B.home.desktop}" alt="Linha de produtos Colamisul: leites, iogurtes, queijos, requeijão e doce de leite" fetchpriority="high"></picture>
+  <picture><source media="(max-width: 767px)" srcset="${href(B.home.mobile)}"><img src="${href(B.home.desktop)}" alt="Linha de produtos Colamisul: leites, iogurtes, queijos, requeijão e doce de leite" fetchpriority="high"></picture>
 </section>
 <section class="section" id="sobre"><div class="container"><div class="grid grid--center">
   <div class="s-4 m-8 l-6 reveal"><div class="art-frame">${img(B.historiaArte, 'Colamisul — laticínios desde 1954')}</div></div>

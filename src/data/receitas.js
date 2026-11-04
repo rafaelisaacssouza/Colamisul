@@ -1,4 +1,4 @@
-const U = 'https://colamisul.inoveweb.com.br/wp-content/uploads/';
+const U = '/assets/uploads/'; // imagens baixadas do site antigo (src/assets/uploads)
 
 // Ordem igual à listagem /receitas/ do site atual
 module.exports = [

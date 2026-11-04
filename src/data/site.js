@@ -1,5 +1,7 @@
 // Conteúdo extraído de colamisul.inoveweb.com.br (textos e imagens originais)
-const U = 'https://colamisul.inoveweb.com.br/wp-content/uploads/';
+const U = '/assets/uploads/'; // imagens baixadas do site antigo (src/assets/uploads)
+// PDFs dos informativos ainda no servidor antigo (arquivos grandes demais para o repositório)
+const PDF = 'https://colamisul.inoveweb.com.br/wp-content/uploads/';
 
 module.exports = {
   U,
@@ -165,10 +167,10 @@ module.exports = {
   ].map(([slug, nome, img], i) => ({ slug, nome, img: U + img, ordem: i + 1 })),
 
   informativos: [
-    { slug: 'informativo-abril', t: 'Informativo – Abril', ano: '2026', ordem: 4, pdf: U + '2026/07/INFORMATIVO-ABRIL.pdf', capa: U + '2026/04/INFORMATIVO-ABRIL.jpg' },
-    { slug: 'informativo-marco', t: 'Informativo – Março', ano: '2026', ordem: 3, pdf: U + '2026/07/INFORMATIVO-MARCO.pdf', capa: U + '2026/04/INFORMATIVO-MARCO.jpg' },
-    { slug: 'informativo-fevereiro', t: 'Informativo – Fevereiro', ano: '2026', ordem: 2, pdf: U + '2026/07/INFORMATIVO-FEVEREIRO.pdf', capa: U + '2026/04/INFORMATIVO-FEVEREIRO.jpg' },
-    { slug: 'informativo-janeiro', t: 'Informativo – Janeiro', ano: '2026', ordem: 1, pdf: U + '2026/07/INFORMATIVO-JANEIRO.pdf', capa: U + '2026/04/INFORMATIVO-JANEIRO.jpg' },
+    { slug: 'informativo-abril', t: 'Informativo – Abril', ano: '2026', ordem: 4, pdf: PDF + '2026/07/INFORMATIVO-ABRIL.pdf', capa: U + '2026/04/INFORMATIVO-ABRIL.jpg' },
+    { slug: 'informativo-marco', t: 'Informativo – Março', ano: '2026', ordem: 3, pdf: PDF + '2026/07/INFORMATIVO-MARCO.pdf', capa: U + '2026/04/INFORMATIVO-MARCO.jpg' },
+    { slug: 'informativo-fevereiro', t: 'Informativo – Fevereiro', ano: '2026', ordem: 2, pdf: PDF + '2026/07/INFORMATIVO-FEVEREIRO.pdf', capa: U + '2026/04/INFORMATIVO-FEVEREIRO.jpg' },
+    { slug: 'informativo-janeiro', t: 'Informativo – Janeiro', ano: '2026', ordem: 1, pdf: PDF + '2026/07/INFORMATIVO-JANEIRO.pdf', capa: U + '2026/04/INFORMATIVO-JANEIRO.jpg' },
   ],
 
   noticias: [
