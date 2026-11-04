@@ -13,18 +13,18 @@ const iogurteRows = [
   ['Açúcares adicionados (g)', '11', '22', '44'], ['Proteínas (g)', '3', '6', '13'], ['Gorduras totais (g)', '3,2', '6,4', '10'],
   ['Gorduras saturadas (g)', '1,9', '3,8', '19'], ['Gorduras trans (g)', '0', '0', '0'], ['Fibra alimentar (g)', '0', '0', '0'], ['Sódio (mg)', '49', '98', '5'],
 ];
-const doceIng = 'Leite, açúcar, glicose, amido de milho e conservante sorbato de potássio.';
+const doceIng = 'Leite, açúcar, glicose, amido e conservante sorbato de potássio.';
 
 module.exports = [
   {
-    slug: 'requeijao', nome: 'Requeijão Colamisul', cat: 'Requeijão / Manteigas',
+    slug: 'requeijao', nome: 'Requeijão Colamisul', cat: 'Requeijão',
     img: U + '2024/07/requeijao-colamisul-1-1024x683.webp', alt: 'Requeijao Colamisul em barra',
     chamada: 'Cremosidade que conquista.',
     desc: 'Com textura aveludada e sabor equilibrado, nosso requeijão em barra é versátil e delicioso. Indispensável no café da manhã e em lanches, ele também é o segredo culinário para dar um toque especial de cremosidade nas receitas dos melhores chefs.',
     tabela: {
       titulo: 'Requeijão',
       ingredientes: 'Massa para produtos lácteos fundidos (leite desnatado e ácido lático), creme de leite, cloreto de sódio (sal), regulador de acidez bicarbonato de sódio (INS 500ii) e conservante sorbato de potássio (INS 292).',
-      embalagem: 'Peça com aprox. 500 g · Caixa com 36 unidades · Porção: 30 g · Porções por peça: 16',
+      embalagem: 'Peça com aprox. 500 g · Caixa com 36 unidades · Porção: 30 g',
       cols: ['100 g', '30 g'],
       rows: [
         ['Valor energético (kcal)', '330', '99', '5'], ['Carboidratos (g)', '5,3', '1,6', '1'], ['Açúcares totais (g)', '5,3', '1,6', '—'],
@@ -35,24 +35,24 @@ module.exports = [
     },
   },
   {
-    slug: 'queijo-mussarela-500g', nome: 'Queijo Mussarela 500g', cat: 'Queijos',
+    slug: 'queijo-mussarela-500g', nome: 'Queijo Mussarela 500 g', cat: 'Queijos',
     img: U + '2024/07/queijo-mussarela-500g-2-1024x683.webp', alt: 'Queijo Mussarela Colamisul 500 g',
     chamada: 'Cooperação em cada fatia.', desc: queijoTxt,
     tabela: {
       titulo: 'Queijo Mussarela — peça 500 g',
-      ingredientes: 'Creme de leite pasteurizado e cloreto de sódio.',
-      embalagem: 'Peça com aprox. 500 g · Caixa com 25 unidades · Porção: 30 g (1 fatia) · Porções por peça: 16',
+      ingredientes: 'Leite pasteurizado, cloreto de sódio (sal), cloreto de cálcio, coagulante e fermento lático.',
+      embalagem: 'Peça com aprox. 500 g · Caixa com 25 unidades · Porção: 30 g (1 fatia)',
       cols: ['100 g', '30 g'], rows: mussarelaRows, notas: [FOOT, PESAR],
     },
   },
   {
-    slug: 'queijo-mussarela-2-800kg', nome: 'Queijo Mussarela 2.800kg', cat: 'Queijos',
-    img: U + '2024/07/queijo-mussarela-2-800kg-1-1024x683.webp', alt: 'Queijo Mussarela Colamisul 2,800 kg',
+    slug: 'queijo-mussarela-2-800kg', nome: 'Queijo Mussarela 2,8 kg', cat: 'Queijos',
+    img: U + '2024/07/queijo-mussarela-2-800kg-1-1024x683.webp', alt: 'Queijo Mussarela Colamisul 2,8 kg',
     chamada: 'Cooperação em cada fatia.', desc: queijoTxt,
     tabela: {
-      titulo: 'Queijo Mussarela — peça 2,800 kg',
-      ingredientes: 'Creme de leite pasteurizado e cloreto de sódio.',
-      embalagem: 'Peça com aprox. 2,800 kg · Caixa com 04 unidades · Porção: 30 g (1 fatia) · Porções por peça: 93',
+      titulo: 'Queijo Mussarela — peça 2,8 kg',
+      ingredientes: 'Leite pasteurizado, cloreto de sódio (sal), cloreto de cálcio, coagulante e fermento lático.',
+      embalagem: 'Peça com aprox. 2,8 kg · Porção: 30 g (1 fatia)',
       cols: ['100 g', '30 g'], rows: mussarelaRows, notas: [FOOT, PESAR],
     },
   },
@@ -64,7 +64,7 @@ module.exports = [
     tabela: {
       titulo: 'Queijo Minas Padrão',
       ingredientes: 'Leite pasteurizado, cloreto de sódio (sal), cloreto de cálcio, coagulante e fermento lático.',
-      embalagem: 'Peça com aprox. 500 g · Caixa com 27 unidades · Porção: 30 g (1 fatia) · Porções por peça: 16',
+      embalagem: 'Peça com aprox. 500 g · Porção: 30 g (1 fatia)',
       cols: ['100 g', '30 g'],
       rows: [
         ['Valor energético (kcal)', '302', '91', '5'], ['Carboidratos (g)', '3,5', '1,1', '0'], ['Açúcares totais (g)', '3,5', '1,1', '—'],
@@ -82,7 +82,7 @@ module.exports = [
     tabela: {
       titulo: 'Queijo Minas Frescal',
       ingredientes: 'Leite pasteurizado, cloreto de sódio (sal), cloreto de cálcio, coagulante.',
-      embalagem: 'Peça com aprox. 500 g · Caixa com aprox. 16 kg · Porção: 30 g (1 fatia)',
+      embalagem: 'Peça com aprox. 500 g · Porção: 50 g (1 fatia)',
       cols: ['100 g', '50 g'],
       rows: [
         ['Valor energético (kcal)', '207', '104', '3'], ['Carboidratos (g)', '2,1', '1,1', '0'], ['Açúcares totais (g)', '2,1', '1,1', '—'],
@@ -93,14 +93,14 @@ module.exports = [
     },
   },
   {
-    slug: 'manteiga-com-sal-200g', nome: 'Manteiga com Sal 200g', cat: 'Requeijão / Manteigas',
+    slug: 'manteiga-com-sal-200g', nome: 'Manteiga com Sal 200 g', cat: 'Manteiga',
     img: U + '2023/12/manteiga-com-sal-200g-1-1024x683.webp', alt: 'Manteiga Dourada com Sal Colamisul 200 g',
     chamada: 'Tradição que você reconhece no sabor.',
     desc: 'A tradicional Manteiga Dourada Colamisul conquista gerações com seu sabor autêntico e cremosidade única. A escolha certa para padarias, cafés, restaurantes e lares que valorizam qualidade superior e aquele toque de tradição indispensável em cada receita.',
     tabela: {
       titulo: 'Manteiga Comum com Sal',
       ingredientes: 'Creme de leite pasteurizado e cloreto de sódio.',
-      embalagem: 'Pote com 200 g · Caixa com 50 unidades · Porção: 10 g (1 colher de sopa)',
+      embalagem: 'Pote com 200 g · Porção: 10 g (1 colher de sopa)',
       cols: ['100 g', '10 g'],
       rows: [['Valor energético (kcal)', '767', '77', '4'], ['Gorduras totais (g)', '85', '8,5', '13'], ['Gorduras saturadas (g)', '48', '4,8', '24'], ['Sódio (mg)', '433', '43', '2']],
       notas: [FOOT],
@@ -113,7 +113,7 @@ module.exports = [
     desc: 'Nosso leite vem direto de famílias produtoras da região, passando por rigorosos padrões de qualidade e controle. É a fonte ideal de nutrição para quem busca sabor verdadeiro, frescor garantido e total confiança para o consumo no dia a dia.',
     tabela: {
       titulo: 'Leite Pasteurizado Integral',
-      embalagem: 'Sachê 1 l · Caixa plástica com 10 unidades · Porção: 200 ml (1 copo)',
+      embalagem: 'Sachê 1 l · Porção: 200 ml (1 copo)',
       cols: ['100 ml', '200 ml'],
       rows: [
         ['Valor energético (kcal)', '61', '121', '6'], ['Carboidratos totais (g)', '4,7', '9,4', '3'], ['Açúcares totais (g)', '4,7', '9,4', '—'],
@@ -125,13 +125,13 @@ module.exports = [
     },
   },
   {
-    slug: 'leite-desnatado-pasteurizado', nome: 'Leite Desnatado Pasteurizado', cat: 'Leites',
-    img: U + '2023/12/leite-desnatado-pasteurizado-1-1024x683.webp', alt: 'Leite Desnatado Pasteurizado Colamisul 1 L',
+    slug: 'leite-desnatado-pasteurizado', nome: 'Leite Pasteurizado Desnatado', cat: 'Leites',
+    img: U + '2023/12/leite-desnatado-pasteurizado-1-1024x683.webp', alt: 'Leite Pasteurizado Desnatado Colamisul 1 L',
     chamada: 'A escolha natural de quem entende de sabor.',
     desc: 'Nosso leite vem direto de famílias produtoras da região, com rigorosos padrões de qualidade e controle. A opção perfeita para quem busca leveza sem abrir mão do sabor e da confiança, ideal para dietas balanceadas e consumo diário com saúde.',
     tabela: {
-      titulo: 'Leite Desnatado Pasteurizado',
-      embalagem: 'Sachê 1 l · Caixa plástica com 10 unidades · Porção: 200 ml (1 copo)',
+      titulo: 'Leite Pasteurizado Desnatado',
+      embalagem: 'Sachê 1 l · Porção: 200 ml (1 copo)',
       cols: ['100 ml', '200 ml'],
       rows: [
         ['Valor energético (kcal)', '35', '70', '4'], ['Carboidratos (g)', '4,5', '9', '3'], ['Açúcares totais (g)', '4,5', '9', '—'],
@@ -144,37 +144,38 @@ module.exports = [
   },
   {
     slug: 'iogurte-integral-morango', nome: 'Iogurte Integral Morango', cat: 'Iogurtes',
-    img: U + '2023/12/iogurte-integral-morango-1-1024x683.webp', alt: 'Iogurte Integral com Preparado de Morango Colamisul 850 g',
+    img: '/assets/img/produtos/iogurte-integral-morango.webp', alt: 'Iogurte Integral com Preparado de Morango Colamisul 850 g',
     chamada: 'Tem fruta de verdade. E isso muda tudo.',
     desc: 'Nossos iogurtes entregam autenticidade no sabor e confiança desde sua origem. Feitos com leite fresco de produtores locais e frutas de verdade, eles oferecem uma experiência de consumo única que fideliza clientes e valoriza sua loja ou sua mesa.',
     tabela: {
       titulo: 'Iogurte Integral com Preparado de Morango',
       ingredientes: 'Leite, açúcar, preparado de morango (água, açúcar, morango, amido modificado, aroma idêntico ao natural de morango, acidulante ácido cítrico INS 330, goma guar INS 412, carboximetilcelulose INS 466, conservante sorbato de potássio INS 202, corante natural carmim de cochonilha INS 120), fermento lático e estabilizante (amido modificado, gelatina INS 428 e goma guar INS 412).',
-      embalagem: 'Frasco com 850 g · Fardo com 10 unidades · Porção: 200 g (1 copo)',
+      embalagem: 'Frasco com 850 g · Porção: 200 g (1 copo)',
       cols: ['100 g', '200 g'], rows: iogurteRows, notas: [FOOT],
     },
   },
   {
-    slug: 'iogurte-integral-granulado', nome: 'Iogurte Integral com Granulado', cat: 'Iogurtes',
-    img: U + '2023/12/iogurte-integral-granulado-1-1024x683.webp', alt: 'Iogurte Integral com Granulado sabor Chocolate Colamisul 850 g',
-    chamada: 'Tem fruta de verdade. E isso muda tudo.',
-    desc: 'Nossos iogurtes entregam autenticidade no sabor e confiança na origem. Feitos com leite fresco de produtores locais e frutas de verdade, eles oferecem uma experiência de consumo única que fideliza clientes e valoriza sua loja ou sua mesa.',
+    slug: 'iogurte-integral-granulado', nome: 'Iogurte Integral com Granulado Sabor Chocolate', cat: 'Iogurtes',
+    img: '/assets/img/produtos/iogurte-integral-granulado.webp', alt: 'Iogurte Integral com Granulado Sabor Chocolate Colamisul 850 g',
+    chamada: 'Cremoso, saboroso e cheio de textura.',
+    desc: 'Nosso iogurte de flocos combina a cremosidade do iogurte com o sabor do chocolate em uma experiência que conquista. Feito com leite fresco de produtores locais, une qualidade e sabor para valorizar sua loja ou sua mesa.',
     tabela: {
-      titulo: 'Iogurte Integral com Granulado',
-      ingredientes: 'Leite, açúcar, granulado sabor chocolate (açúcar, gordura vegetal hidrogenada, cacau em pó, amido de milho, estabilizantes lecitina de soja e mono e diglicerídeo de ácidos graxos, sal, aromatizante, talco, xarope de glicose, conservante sorbato de potássio e aroma artificial de baunilha), fermento lático e estabilizante (amido modificado, gelatina INS e goma guar INS 412).',
-      embalagem: 'Pote com 850 g · Fardo com 10 unidades · Porção: 200 g (1 copo)',
+      titulo: 'Iogurte Integral com Granulado Sabor Chocolate',
+      // Texto da agência (pág. 15) com "lecitina" e "glaceante" corrigidos (vieram como "lectina" e "claceante")
+      ingredientes: 'Leite, açúcar, granulado sabor chocolate (açúcar, gordura vegetal hidrogenada, cacau em pó, amido de milho, estabilizantes lecitina de soja e mono e diglicerídeo de ácidos graxos, sal, glaceante, talco, xarope de glicose, conservante sorbato de potássio e aroma artificial de baunilha), fermento lático e estabilizante (amido modificado, gelatina INS 428 e goma guar INS 412).',
+      embalagem: 'Frasco com 850 g · Porção: 200 g (1 copo)',
       cols: ['100 g', '200 g'], rows: iogurteRows, notas: [FOOT],
     },
   },
   {
-    slug: 'doce-de-leite-tablet', nome: 'Doce de Leite Tablet', cat: 'Doce de Leite',
+    slug: 'doce-de-leite-tablet', nome: 'Doce de Leite Tablete', cat: 'Doce de Leite',
     img: U + '2023/12/doce-de-leite-tablet-1-1024x683.webp', alt: 'Doce de Leite Colamisul em tablete',
     chamada: 'Doce de leite com sabor que conta nossa história.',
     desc: 'Feito com ingredientes selecionados, o Doce de Leite Colamisul tem textura firme e sabor caseiro que remetem à infância. Perfeita para compartilhar momentos doces ou para compor a mesa de quem não abre mão da tradição.',
     tabela: {
-      titulo: 'Doce de Leite em Tablete',
+      titulo: 'Doce de Leite Tablete',
       ingredientes: 'Leite, açúcar, glicose de milho e conservante sorbato de potássio.',
-      embalagem: 'Pote com 230 kg · Caixa com 68 unidades · Porção: 40 g (2 tabletinhos) · Porções por tablete: 5',
+      embalagem: 'Tablete com 230 g · Porção: 40 g (1 e ½ fatias)',
       cols: ['100 g', '40 g'],
       rows: [
         ['Valor energético (kcal)', '385', '154', '8'], ['Carboidratos (g)', '74', '30', '10'], ['Açúcares totais (g)', '12', '4,8', '—'],
@@ -185,14 +186,14 @@ module.exports = [
     },
   },
   {
-    slug: 'doce-de-leite-pastoso', nome: 'Doce de Leite Pastoso 350g', cat: 'Doce de Leite',
-    img: U + '2023/12/doce-de-leite-pastoso-350g-1-1024x683.webp', alt: 'Doce de Leite Pastoso Colamisul pote 350 g',
+    slug: 'doce-de-leite-pastoso', nome: 'Doce de Leite Pastoso 300 g', cat: 'Doce de Leite',
+    img: U + '2023/12/doce-de-leite-pastoso-350g-1-1024x683.webp', alt: 'Doce de Leite Pastoso Colamisul pote 300 g',
     chamada: 'Doce de leite com sabor que conta nossa história.',
     desc: 'Feito com ingredientes selecionados, o Doce de Leite Colamisul tem textura cremosa e sabor caseiro que remetem à infância. Para comer de colher, passar no pão ou rechear bolos e tortas, trazendo doçura na medida certa para o seu dia.',
     tabela: {
-      titulo: 'Doce de Leite Pastoso — pote 350 g',
+      titulo: 'Doce de Leite Pastoso 300 g',
       ingredientes: doceIng,
-      embalagem: 'Pote com 350 g · Caixa com 40 unidades · Porção: 20 g (1½ colher de sopa) · Porções por embalagem: cerca de 17',
+      embalagem: 'Pote com 300 g · Porção: 20 g (1 e ½ colher de sopa)',
       cols: ['100 g', '20 g'],
       rows: [
         ['Valor energético (kcal)', '323', '65', '3'], ['Carboidratos (g)', '60', '12', '4'], ['Açúcares totais (g)', '10', '2', '—'],
@@ -203,14 +204,14 @@ module.exports = [
     },
   },
   {
-    slug: 'doce-de-leite-balde-48kg', nome: 'Doce de Leite Balde 4,8kg', cat: 'Doce de Leite',
+    slug: 'doce-de-leite-balde-48kg', nome: 'Doce de Leite Balde 4,8 kg', cat: 'Doce de Leite',
     img: U + '2022/08/doce-de-leite-balde-4-8kg-1024x683.webp', alt: 'Doce de Leite Pastoso Colamisul - balde 4,8 kg',
     chamada: 'Doce de leite com sabor que conta nossa história.',
     desc: 'Feito com ingredientes selecionados, o Doce de Leite Colamisul tem aquela textura cremosa e sabor caseiro que remetem à infância. Ideal para comer de colher, passar no pão ou rechear bolos e tortas, trazendo doçura na medida certa para o seu dia.',
     tabela: {
-      titulo: 'Doce de Leite Pastoso — balde 4,8 kg',
+      titulo: 'Doce de Leite Balde 4,8 kg',
       ingredientes: doceIng,
-      embalagem: 'Balde com 4,8 kg · Vendido por unidade · Porção: 20 g (1½ colher de sopa) · Porções por embalagem: cerca de 240',
+      embalagem: 'Balde com 4,8 kg · Porção: 20 g (1 e ½ colher de sopa)',
       cols: ['100 g', '20 g'],
       rows: [
         ['Valor energético (kcal)', '323', '65', '3'], ['Carboidratos (g)', '60', '12', '4'], ['Açúcares totais (g)', '51', '10', '—'],

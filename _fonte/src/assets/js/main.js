@@ -118,6 +118,21 @@
       gsap.from($$('.inner .grid > div > *', hero), { y: 30, opacity: 0, duration: .9, stagger: .08, ease: 'power3.out', delay: .1 });
     });
 
+    // Vídeo do banner (YouTube): desliga a legenda que o player liga sozinho
+    $$('iframe[data-no-captions]').forEach(f => {
+      const send = (func, args) => f.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
+      f.addEventListener('load', () => {
+        f.contentWindow?.postMessage(JSON.stringify({ event: 'listening' }), '*');
+        // repete nos primeiros segundos, até a legenda carregar e ser desligada
+        let n = 0;
+        const t = setInterval(() => {
+          send('unloadModule', ['captions']);
+          send('setOption', ['captions', 'track', {}]);
+          if (++n > 20) clearInterval(t);
+        }, 500);
+      });
+    });
+
     // Banners das páginas internas (arte em imagem): zoom de entrada + parallax
     $$('.banner:not(.banner--video)').forEach(banner => {
       const img = $('img', banner);
@@ -220,6 +235,139 @@
       ano = chip.dataset.value; apply();
     });
     sortSel.addEventListener('change', apply);
+  }
+
+  /* ---------- Nossa história: ata de fundação (sala de museu) ---------- */
+  const museum = $('[data-museum]');
+  if (museum) {
+    const viewport = $('[data-museum-viewport]', museum);
+    const track = $('[data-museum-track]', museum);
+    const bar = $('[data-museum-progress]', museum);
+    const frames = $$('.museum__frame', museum);
+    let st = null; // ScrollTrigger enquanto a seção está presa (desktop)
+    const dist = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
+    const setBar = p => { if (bar) bar.style.transform = `scaleX(${p})`; };
+
+    // Desktop: o painel fica preso (sticky) ao lado do texto e as folhas passam enquanto o texto rola.
+    // Timeline com o topo do painel como gatilho: começa quando o painel chega na linha do sticky
+    // (prende na tela) e termina quando ele solta, no fim do texto. O topo é medido pela coluna
+    // (que não é sticky) + margem do painel, para a posição não mudar se recalcular já rolado.
+    if (gsap) {
+      gsap.matchMedia().add('(min-width: 1024px)', () => {
+        museum.classList.add('is-scrub');
+        const col = museum.parentElement;
+        const stickTop = () => parseFloat(getComputedStyle(museum).top) || 0;   // top do sticky no CSS
+        const panelOffset = () => parseFloat(getComputedStyle(museum).marginTop) || 0;
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: col,
+            start: () => `top+=${panelOffset()} top+=${stickTop()}`,             // topo do painel encosta no sticky
+            end: () => `bottom top+=${stickTop() + museum.offsetHeight}`,        // painel solta (fim da coluna)
+            scrub: true, invalidateOnRefresh: true,
+            onUpdate: self => setBar(self.progress),
+          },
+        });
+        tl.fromTo(track, { x: 0 }, { x: () => -dist(), ease: 'none' });
+        st = tl.scrollTrigger;
+        // recalcula quando imagens e fontes terminam de carregar (alturas mudam)
+        window.addEventListener('load', () => ST.refresh(), { once: true });
+        return () => { museum.classList.remove('is-scrub'); st = null; };
+      });
+    }
+    // Celular / movimento reduzido: faixa com rolagem horizontal
+    viewport.addEventListener('scroll', () => {
+      if (st) return;
+      const max = viewport.scrollWidth - viewport.clientWidth;
+      setBar(max ? viewport.scrollLeft / max : 0);
+    }, { passive: true });
+
+    const scrollPage = y => { if (lenis) lenis.scrollTo(y, { immediate: true }); else window.scrollTo(0, y); };
+
+    // Arrastar com o mouse ("grab"): move a página quando presa, ou a faixa quando não
+    let drag = null, moved = false;
+    viewport.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      drag = { x: e.clientX, y: window.scrollY, left: viewport.scrollLeft };
+      moved = false;
+    });
+    window.addEventListener('pointermove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!moved && Math.abs(dx) < 6) return;
+      if (!moved) { moved = true; museum.classList.add('is-dragging'); }
+      // arrastar a folha 1px equivale a rolar a página na proporção do percurso
+      if (st) { const k = dist() ? (st.end - st.start) / dist() : 0; scrollPage(Math.min(st.end, Math.max(st.start, drag.y - dx * k))); }
+      else viewport.scrollLeft = drag.left - dx;
+    });
+    window.addEventListener('pointerup', () => {
+      if (!drag) return;
+      drag = null;
+      museum.classList.remove('is-dragging');
+      setTimeout(() => { moved = false; }, 0);
+    });
+    // Soltar depois de arrastar não abre a ampliação
+    viewport.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+
+    // Teclado: ao focar uma folha fora da tela, a rolagem leva até ela
+    frames.forEach(f => f.addEventListener('focus', () => {
+      if (!st || drag) return;
+      const item = f.parentElement;
+      const d = dist();
+      const p = d ? Math.min(1, Math.max(0, (item.offsetLeft + item.offsetWidth / 2 - viewport.clientWidth / 2) / d)) : 0;
+      scrollPage(st.start + p * (st.end - st.start));
+    }));
+
+    // Ampliação: tela cheia, setas, clique para aproximar e mover o mouse para percorrer a folha
+    const dlg = $('[data-lightbox]');
+    if (dlg && typeof dlg.showModal === 'function') {
+      const data = JSON.parse($('[data-lightbox-data]', dlg).textContent);
+      const im = $('[data-lightbox-img]', dlg);
+      const stage = $('[data-lightbox-stage]', dlg);
+      let idx = 0, opener = null;
+      const unzoom = () => { dlg.classList.remove('is-zoomed'); im.style.transformOrigin = ''; };
+      const show = i => {
+        idx = (i + data.length) % data.length;
+        unzoom();
+        const d = data[idx];
+        im.src = d.src;
+        im.alt = 'Ata de fundação da Colamisul — ' + d.titulo;
+        $('[data-lightbox-title]', dlg).textContent = d.titulo;
+        $('[data-lightbox-text]', dlg).textContent = d.legenda;
+        $('[data-lightbox-count]', dlg).textContent = `${idx + 1} / ${data.length}`;
+        [idx + 1, idx - 1].forEach(j => { const pre = new Image(); pre.src = data[(j + data.length) % data.length].src; });
+      };
+      frames.forEach(f => f.addEventListener('click', () => {
+        opener = f;
+        show(Number(f.dataset.index));
+        dlg.showModal();
+        if (lenis) lenis.stop();
+      }));
+      dlg.addEventListener('close', () => {
+        unzoom();
+        if (lenis) lenis.start();
+        if (opener) opener.focus({ preventScroll: true });
+      });
+      $('[data-lightbox-close]', dlg).addEventListener('click', () => dlg.close());
+      $('[data-lightbox-prev]', dlg).addEventListener('click', () => show(idx - 1));
+      $('[data-lightbox-next]', dlg).addEventListener('click', () => show(idx + 1));
+      dlg.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1); }
+      });
+      const origin = e => {
+        const r = stage.getBoundingClientRect();
+        const px = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+        const py = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
+        im.style.transformOrigin = `${px * 100}% ${py * 100}%`;
+      };
+      stage.addEventListener('click', e => {
+        if (e.target !== im && !dlg.classList.contains('is-zoomed')) { dlg.close(); return; }
+        origin(e);
+        dlg.classList.toggle('is-zoomed');
+      });
+      stage.addEventListener('pointermove', e => { if (dlg.classList.contains('is-zoomed')) origin(e); });
+      dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+    }
   }
 
   /* ---------- Formulário de contato (sem backend: abre o e-mail com os dados preenchidos) ---------- */

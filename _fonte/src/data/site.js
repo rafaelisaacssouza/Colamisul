@@ -19,9 +19,11 @@ module.exports = {
     address: 'Rodovia Rubens Rangel, Nº 449, Mimoso do Sul - ES, 29.400-000',
     instagram: 'https://www.instagram.com/colamisul.laticinios',
     instagramHandle: '@colamisul.laticinios',
-    // TODO: confirmar o endereço da página oficial no Facebook
-    facebook: 'https://www.facebook.com/colamisul',
+    facebook: 'https://www.facebook.com/profile.php?id=61564164694054', // do PDF de ajustes da agência
     whatsapp: 'https://wa.me/28999234485',
+    // Catálogo em PDF (seção na página de produtos). Ex.: '/arquivos/catalogo-colamisul.pdf'.
+    // Enquanto estiver vazio, o botão aparece desativado.
+    catalogo: '',
     mapEmbed: 'https://www.google.com/maps?q=Rodovia+Rubens+Rangel,+449,+Mimoso+do+Sul+-+ES&output=embed',
   },
 
@@ -166,26 +168,92 @@ module.exports = {
     ['carlos-alberto-vivas-motta', 'Carlos Alberto Vivas Motta', '2026/06/20-Carlos-Alberto-Vivas-Motta-25x30-x.jpg'],
   ].map(([slug, nome, img], i) => ({ slug, nome, img: U + img, ordem: i + 1 })),
 
+  // Diretoria e conselhos (págs. 23–24 do PDF da agência). Fotos em assets/img/diretoria/
+  conselho: {
+    diretoria: [
+      { cargo: 'Presidente', nome: 'Carlos Alberto Vivas Motta', img: '/assets/img/diretoria/carlos-alberto-vivas-motta.webp' },
+      { cargo: 'Vice-presidente', nome: 'Silvio Gonçalves Belloti', img: '/assets/img/diretoria/silvio-goncalves-belloti.webp' },
+      { cargo: 'Diretor Secretário', nome: 'Marcelo Fonseca Mofati', img: '/assets/img/diretoria/marcelo-fonseca-mofati.webp' },
+    ],
+    administrativo: ['Flávio Ribeiro Constantino', 'Ildon Terra Lamis', 'Joaquim Adolpho Guedes Vivas', 'Leomárcio Menditi de Souza', 'Sandro de Oliveira Prúcoli'],
+    fiscal: {
+      efetivos: ['Giordani Carrari Porto', 'Marcos José Matieli da Silva', 'Maurício Elias Bernardes'],
+      suplentes: ['Afrânio Barros Nogueira', 'Fernando Prúcoli Paiva', 'Roberto Carlos dos Santos Fontes'],
+    },
+  },
+
+  // Ata de fundação (Nossa história): galeria "museu". Imagens em assets/img/atas/
+  atas: [
+    { n: '01', titulo: 'Folha 1', legenda: 'Abertura da Assembleia de Constituição da Sociedade Cooperativa de Laticínios de Mimoso do Sul' },
+    { n: '02', titulo: 'Folha 2', legenda: 'Apresentação da proposta e leitura dos estatutos' },
+    { n: '03', titulo: 'Folha 3', legenda: 'Aprovação dos estatutos e eleição dos primeiros dirigentes' },
+    { n: '04', titulo: 'Folha 4', legenda: 'Encerramento, em 24 de janeiro de 1954, e assinaturas dos cooperados fundadores' },
+    { n: '05', titulo: 'Nota da Diretoria', legenda: 'Homenagem da Diretoria Executiva 2025/2027 aos fundadores' },
+  ].map(a => ({ ...a, img: `/assets/img/atas/ata-${a.n}.webp`, grande: `/assets/img/atas/ata-${a.n}-grande.webp` })),
+
+  // ordem = ano * 100 + mês (ordenação entre anos). Jan–abr/2026: PDFs ainda no servidor antigo (muito grandes).
   informativos: [
-    { slug: 'informativo-abril', t: 'Informativo – Abril', ano: '2026', ordem: 4, pdf: PDF + '2026/07/INFORMATIVO-ABRIL.pdf', capa: U + '2026/04/INFORMATIVO-ABRIL.jpg' },
-    { slug: 'informativo-marco', t: 'Informativo – Março', ano: '2026', ordem: 3, pdf: PDF + '2026/07/INFORMATIVO-MARCO.pdf', capa: U + '2026/04/INFORMATIVO-MARCO.jpg' },
-    { slug: 'informativo-fevereiro', t: 'Informativo – Fevereiro', ano: '2026', ordem: 2, pdf: PDF + '2026/07/INFORMATIVO-FEVEREIRO.pdf', capa: U + '2026/04/INFORMATIVO-FEVEREIRO.jpg' },
-    { slug: 'informativo-janeiro', t: 'Informativo – Janeiro', ano: '2026', ordem: 1, pdf: PDF + '2026/07/INFORMATIVO-JANEIRO.pdf', capa: U + '2026/04/INFORMATIVO-JANEIRO.jpg' },
+    { slug: 'informativo-abril', t: 'Informativo – Abril 2026', ano: '2026', ordem: 202604, pdf: PDF + '2026/07/INFORMATIVO-ABRIL.pdf', capa: U + '2026/04/INFORMATIVO-ABRIL.jpg' },
+    { slug: 'informativo-marco', t: 'Informativo – Março 2026', ano: '2026', ordem: 202603, pdf: PDF + '2026/07/INFORMATIVO-MARCO.pdf', capa: U + '2026/04/INFORMATIVO-MARCO.jpg' },
+    { slug: 'informativo-fevereiro', t: 'Informativo – Fevereiro 2026', ano: '2026', ordem: 202602, pdf: PDF + '2026/07/INFORMATIVO-FEVEREIRO.pdf', capa: U + '2026/04/INFORMATIVO-FEVEREIRO.jpg' },
+    { slug: 'informativo-janeiro', t: 'Informativo – Janeiro 2026', ano: '2026', ordem: 202601, pdf: PDF + '2026/07/INFORMATIVO-JANEIRO.pdf', capa: U + '2026/04/INFORMATIVO-JANEIRO.jpg' },
+    // PDFs em /arquivos/informativos/<ano>/ (na raiz, fora do build, para não duplicar no repositório) e capas (1ª página) em assets/informativos/capas/
+    ...[
+      ['2026', [5, 6, 7, 8]],
+      ['2025', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
+    ].flatMap(([ano, meses]) => meses.map(m => {
+      const nome = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'][m - 1];
+      const slug = `informativo-${nome.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()}-${ano}`;
+      return { slug, t: `Informativo – ${nome} ${ano}`, ano, ordem: Number(ano) * 100 + m, pdf: `/arquivos/informativos/${ano}/${slug}.pdf`, capa: `/assets/informativos/capas/${slug}.jpg` };
+    })),
   ],
 
+  // Notícia (pág. 21 do PDF da agência): artigo da Plimper. corpo aceita texto (parágrafo),
+  // { h } subtítulo, { ul: [...] } lista, { img, alt } imagem e { credito } nota final.
   noticias: [
     {
-      slug: 'colamisul-em-foco',
-      url: '/2025/12/colamisul-em-foco/',
-      t: 'Colamisul em foco',
-      data: 'Dezembro de 2025',
-      img: U + '2025/12/634.webp',
-      resumo: 'Em 2022 comemoramos o bicentenário de nossa Independência. Como parte das comemorações deste …',
+      slug: 'colamisul-qualidade-que-vem-do-coracao',
+      url: '/2026/01/colamisul-qualidade-que-vem-do-coracao/',
+      t: 'Colamisul: qualidade que vem do coração',
+      data: 'Janeiro de 2026',
+      img: '/assets/img/noticias/qualidade-que-vem-do-coracao/capa.webp',
+      resumo: 'A força da Colamisul sempre esteve na relação entre cooperados, famílias, consumidores e território. Esse vínculo não é conceitual, é vivido.',
+      original: 'https://plimdesign.com.br/blog/colamisul-qualidade-que-vem-do-coracao/',
       corpo: [
-        'Mais um ponto para a longeva Cooperativa de Laticínios de Mimoso do Sul (ES), com mais de sessenta anos em funcionamento ininterrupto, mais conhecida pelos populares como COLAMISUL pelo cuidado na área ambiental. Ela construiu um poço artesiano em 2007 com 90 metros de profundidade para abastecer o pátio industrial e realizar pré tratamento da água a ser utilizada no processo de fabricação.',
-        'Essa água é monitorada para garantir boa qualidade, ao entrar em contato direto com os PRODUTOS DOURADO. A COLAMISUL, dentro da responsabilidade ambiental e social, está fazendo reuso racional da água saudável. Aproveita-se também a água da chuva. Para isso foi instalada 3 caixas para armazenar 50.000 litros de água da chuva. Os resíduos sólidos (lixo) produzidos pela COLAMISUL são separados e destinados para a reciclagem. Outros resíduos são destinados para empresas credenciadas, para dar o destino ambiental correto. Exemplo disso são os materiais ou vasilhames com resíduos de graxas, óleos, lama do lavador.',
-        'A Cooperativa é proativa na busca de alternativas para assegurar aos produtos o padrão de excelência qualitativa, destinada ao consumidor final. Acrescenta-se que foi implantado as mais novas ferramentas para controlar a matéria-prima (leite) e da produção como o AUTOCONTROLE e o APPCC – Análise de Perigo e Pontos Críticos de Controle. O APPCC foi um procedimento desenvolvido pela NASA – Administração Nacional do Espaço e Aeronáutica, para garantir alimento seguro para os astronautas. Atualmente serve de base para a fabricação de alimentos seguros. Somente a partir da implantação do APPCC, são identificados os pontos críticos de controle de um determinado perigo, e são estabelecidos limites críticos, realizando-se um rígido acompanhamento e verificação, registrando-se os procedimentos a fim de subsidiar possíveis ações corretivas.',
-        'Em suma, a COLAMISUL é genuinamente mimosense, e geradora de emprego, renda e de produtos de qualidade, apreciados além das fronteiras. A Diretoria atual é capitaneada por Silvio G. Beloti, Carlos Alberto V. Motta e José Augusto Posse.',
+        'A Colamisul é uma marca construída a partir do compromisso diário. Antes de qualquer símbolo ou identidade visual, ela nasce do propósito que move pessoas a começarem todos os dias com responsabilidade, pertencimento e orgulho.',
+        'Desde 1954, cada cooperado entrega mais do que leite. Entrega constância, cuidado contínuo e uma herança construída ao longo do tempo. Esse valor está no gesto repetido, na relação direta com a terra e nos processos conduzidos com atenção e respeito. A confiança que chega à mesa das famílias não é criada por discurso, mas por prática.',
+        'O desafio apresentado à Plimper partiu exatamente desse ponto: como tornar visível aquilo que sempre esteve presente? Como estruturar uma identidade capaz de traduzir cooperação, proximidade e credibilidade em uma linguagem contemporânea, sem descaracterizar a essência da cooperativa?',
+        'Mais do que criar uma nova marca, o projeto propõe transformar sentimento em sistema, afeto em estratégia e história em presença clara e consistente.',
+        { h: 'Símbolo que nasce da terra' },
+        'O ponto de partida do projeto foi o território. O Pico dos Pontões, um dos maiores símbolos de Mimoso do Sul, carrega forte valor cultural, afetivo e identitário para a comunidade local. Ele representa permanência, referência e orgulho coletivo. Era impossível construir a narrativa visual da Colamisul sem considerar esse elemento.',
+        'Ao aprofundar o estudo simbólico, o contorno do Pico revelou uma leitura estratégica: além da montanha, ele forma a letra “M” de Mimoso do Sul. Território e identidade se encontram em um único gesto visual, reforçando o posicionamento da marca como uma cooperativa que assume suas raízes e diz, de forma clara: “somos daqui”.',
+        'Como reforça Romis Carmo, diretor criativo da Plimper: “A identidade de uma marca não se desenvolve sem entender sua comunidade, seus colaboradores e seus clientes.”',
+        { img: '/assets/img/noticias/qualidade-que-vem-do-coracao/doce-de-leite.webp', alt: 'Doce de leite Colamisul servido na colher' },
+        { h: 'Design que conecta pessoas, produtos e propósito' },
+        'A força da Colamisul sempre esteve na relação entre cooperados, famílias, consumidores e território. Esse vínculo não é conceitual, é vivido. O desafio do design foi dar forma visual a essa rede de relações.',
+        'A solução surgiu a partir de um símbolo simples e carregado de significado: um coração formado por fitas. As fitas representam o fluxo contínuo da cooperativa, o caminho que liga quem produz a quem consome, quem cuida da terra a quem confia no produto final.',
+        'De forma sutil, essas fitas também constroem as iniciais “C” de cooperativa e “M” de Mimoso. É um detalhe que não exige explicação para funcionar, mas que aprofunda o sentido da marca para quem observa com atenção.',
+        'Como dizia Bruno Munari, “para entender o design, basta observar a natureza”. Aqui, o design nasce do movimento natural da cooperação e o traduz em linguagem visual.',
+        { h: 'Uma marca preparada para o amanhã' },
+        'O rebranding da Colamisul foi estruturado como uma plataforma completa de marca, envolvendo:',
+        { ul: ['Reposicionamento estratégico', 'Nova identidade visual e verbal', 'Redesenho das embalagens', 'Estratégia de comunicação', 'Posicionamento digital', 'Construção de plataforma de marca'] },
+        'O objetivo foi garantir coerência em todos os pontos de contato. Assim como na lógica cooperativista, nenhuma parte funciona sozinha. Visual, discurso, embalagem e presença digital precisam atuar em conjunto para sustentar percepção, confiança e reconhecimento.',
+        { img: '/assets/img/noticias/qualidade-que-vem-do-coracao/marca.webp', alt: 'Aplicações da nova identidade visual da Colamisul' },
+        { h: 'Da montanha para o rótulo: embalagens que contam histórias' },
+        'A atualização das embalagens teve como foco elevar a percepção de qualidade sem romper o vínculo cultural da marca. Foram adotadas cores que diferenciam as linhas de produto, mantendo unidade visual, além da presença constante do Pico dos Pontões como assinatura territorial.',
+        'Elementos gráficos e sensoriais sutis reforçam origem, sabor e proximidade. Cada detalhe foi desenhado para comunicar consistência e fortalecer o reconhecimento da Colamisul no ponto de venda e no cotidiano do consumidor.',
+        { img: '/assets/img/noticias/qualidade-que-vem-do-coracao/embalagens.webp', alt: 'Novas embalagens da linha de produtos Colamisul' },
+        { h: 'Olhe, Ouça e Sinta: a marca pelos sentidos' },
+        'A metodologia da Plimper orientou todo o projeto a partir da percepção.',
+        { ul: [
+          'Olhe — A origem é o primeiro contato visual. O Pico dos Pontões e o coração formam um símbolo que une território, cooperativismo e cuidado. Simples, direto e carregado de significado.',
+          'Ouça — O som da marca é o da cooperação, é a troca constante entre mais de 260 cooperados. O movimento das fitas traduz esse fluxo vivo de relações, onde nada é isolado e tudo se conecta.',
+          'Sinta — A Colamisul transmite cuidado real. A sensação é de produto feito com tempo, responsabilidade e compromisso. A identidade visual reforça segurança e humanidade, mostrando que há pessoas de verdade por trás de cada etapa.',
+        ] },
+        { img: '/assets/img/noticias/qualidade-que-vem-do-coracao/manteiga.webp', alt: 'Criança com a Manteiga Dourada Colamisul' },
+        { h: 'Digital que aproxima' },
+        'A presença digital da Colamisul foi pensada para refletir o que a marca sempre foi fora das telas: próxima, confiável e presente. O feed passa a ocupar o mesmo espaço simbólico que a marca já ocupa na mesa das pessoas.',
+        { credito: 'Texto: Romis Carmo, da Plimper. Publicação e SEO: Brunna Gambarini. Imagens produzidas pela equipe Plimper.' },
       ],
     },
   ],

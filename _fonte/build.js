@@ -14,7 +14,7 @@ const OUT = path.join(__dirname, '..');
 const SRC = path.join(__dirname, 'src');
 // Lista do que o build escreveu na raiz, para apagar só isso no próximo build
 const MANIFEST = path.join(__dirname, '.gerados.json');
-const PROTEGIDOS = new Set(['_fonte', '.git', '.github', 'node_modules', 'README.md', 'package.json', 'package-lock.json', '.gitignore']);
+const PROTEGIDOS = new Set(['_fonte', 'arquivos', '.git', '.github', 'node_modules', 'README.md', 'package.json', 'package-lock.json', '.gitignore']);
 
 const D = require('./src/data/site');
 const PRODUTOS = require('./src/data/produtos');
@@ -150,7 +150,7 @@ function footer() {
       <div class="socials"><a href="${S.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${I.insta}</a><a href="${S.whatsapp}" target="_blank" rel="noopener" aria-label="WhatsApp">${I.whats}</a></div>
     </div>
   </div></div>
-  <div class="bottom"><div class="container">© Copyright <span data-year>2026</span> – ${S.cnpj} – ${esc(S.fullName)} – Todos os Direitos Reservados · <a href="${href('/politica-de-privacidade/')}">Política de Privacidade</a></div></div>
+  <div class="bottom"><div class="container">© Copyright <span data-year>2026</span> – ${esc(S.fullName)} – CNPJ: ${S.cnpj} – Todos os direitos reservados. · <a href="${href('/politica-de-privacidade/')}">Política de Privacidade</a></div></div>
 </footer>
 <div class="float-actions"><a class="fa-fb" href="${S.facebook}" target="_blank" rel="noopener" aria-label="Colamisul no Facebook">${I.fb}</a><a class="fa-insta" href="${S.instagram}" target="_blank" rel="noopener" aria-label="Colamisul no Instagram">${I.insta}</a><a class="fa-whats" href="${S.whatsapp}" target="_blank" rel="noopener" aria-label="Fale no WhatsApp">${I.whats}</a><button class="fa-top" type="button" aria-label="Voltar ao topo">${I.up}</button></div>`;
 }
@@ -194,7 +194,7 @@ const crumbs = list => `<ol class="breadcrumb">${list.map(([l, u]) => u ? `<li><
 
 // Banner original (a arte já vem na imagem) + bloco de título centralizado abaixo
 const banner = (image, video) => video
-  ? `<section class="banner banner--video"><iframe src="https://www.youtube-nocookie.com/embed/${video}?autoplay=1&mute=1&loop=1&playlist=${video}&controls=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&rel=0&modestbranding=1" title="Vídeo institucional Colamisul" allow="autoplay; encrypted-media" tabindex="-1"></iframe></section>`
+  ? `<section class="banner banner--video"><iframe src="https://www.youtube-nocookie.com/embed/${video}?autoplay=1&mute=1&loop=1&playlist=${video}&controls=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&rel=0&modestbranding=1&cc_load_policy=0&enablejsapi=1" title="Vídeo institucional Colamisul" data-no-captions allow="autoplay; encrypted-media" tabindex="-1"></iframe></section>`
   : `<section class="banner"><img src="${href(image)}" alt="" fetchpriority="high"></section>`;
 
 function pageHero({ title, eyebrow, lead, image, video, trail, bg = '', hideTitle = false }) {
@@ -229,12 +229,38 @@ const presidentCard = p => `<div class="s-2 m-2 l-2 president reveal" id="${p.sl
   <div class="photo">${img(p.img, p.nome)}<span class="ord" aria-hidden="true">${p.ordem}</span></div>
   <figcaption>${esc(p.nome)}</figcaption></figure></div>`;
 
+// Presidentes: diretoria executiva (com foto) e conselhos, antes da galeria
+const conselhoSection = () => {
+  const C = D.conselho;
+  const lista = l => `<ul class="board-list">${l.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`;
+  return `<section class="section"><div class="container">
+  <div class="section-head reveal"><div><span class="eyebrow">Gestão da cooperativa</span><h2 class="display-l t-lime">Diretoria e Conselhos</h2></div></div>
+  <h3 class="board-group reveal">Diretoria Executiva</h3>
+  <div class="grid">${C.diretoria.map(p => `<div class="s-4 m-4 l-4 reveal"><figure class="board-person"><div class="photo">${img(p.img, p.nome)}</div><figcaption><span class="role">${esc(p.cargo)}</span><strong>${esc(p.nome)}</strong></figcaption></figure></div>`).join('')}</div>
+  <div class="grid mt-l">
+    <div class="s-4 m-8 l-6 reveal"><div class="board-card"><h3>Conselho Administrativo</h3>${lista(C.administrativo)}</div></div>
+    <div class="s-4 m-8 l-6 reveal"><div class="board-card"><h3>Conselho Fiscal</h3><div class="board-cols"><div><p class="board-sub">Efetivos</p>${lista(C.fiscal.efetivos)}</div><div><p class="board-sub">Suplentes</p>${lista(C.fiscal.suplentes)}</div></div></div></div>
+  </div>
+</div></section>`;
+};
+
 const ctaParceiro = (tone = '') => `<section class="section--tight"><div class="container"><div class="cta-band reveal ${tone ? 'cta-band--' + tone : ''}"><div class="grid grid--center">
   <div class="s-4 m-5 l-8"><h2 class="display-l cta-band__title">Torne-se um parceiro Colamisul.</h2></div>
   <div class="s-4 m-3 l-4" style="justify-self:start">${btn('Saiba mais', '/contato/', 'btn--yellow')}</div>
 </div></div></div></section>`;
 
-const infoBoxes = () => `<div class="info-stack">
+// Produtos: chamada para baixar o catálogo (sem link definido, o botão fica desativado)
+const catalogoBand = () => {
+  const botao = S.catalogo
+    ? `<a class="btn btn--yellow" href="${href(S.catalogo)}" target="_blank" rel="noopener" download>Baixar catálogo ${I.doc}</a>`
+    : `<span class="btn btn--yellow is-disabled" aria-disabled="true" title="Catálogo disponível em breve">Baixar catálogo ${I.doc}</span>`;
+  return `<section class="section--tight bg-cream" id="catalogo"><div class="container"><div class="cta-band reveal"><div class="grid grid--center">
+  <div class="s-4 m-5 l-8"><span class="eyebrow on-dark">Catálogo</span><h2 class="display-m">Tudo o que você precisa, em um só lugar.</h2><p class="mb-0">Baixe o catálogo Colamisul e tenha nossa linha de produtos sempre à mão.</p></div>
+  <div class="s-4 m-3 l-4">${botao}</div>
+</div></div></div></section>`;
+};
+
+const infoBoxes = () =>`<div class="info-stack">
   <div class="info-box"><span class="ico">${I.pin}</span><div><h3>Onde estamos?</h3><p>${esc(S.address)}</p></div></div>
   <div class="info-box"><span class="ico">${I.phone}</span><div><h3>Contato</h3>${S.phones.map(p => `<p><a href="${tel(p)}">${p}</a></p>`).join('')}</div></div>
   <div class="info-box"><span class="ico">${I.mail}</span><div><h3>Email</h3><p><a href="mailto:${S.email}">${S.email}</a></p></div></div>
@@ -275,6 +301,34 @@ const instagramBand = () => `<section class="section--tight"><div class="contain
   <div class="s-4 m-5 l-8"><span class="eyebrow on-dark">Instagram</span><h2 class="display-m">${esc(S.instagramHandle)}</h2><p class="mb-0">Mantenha-se atualizado sobre nossos lançamentos e ofertas seguindo nosso perfil no instagram!</p></div>
   <div class="s-4 m-3 l-4"><a class="btn btn--yellow" href="${S.instagram}" target="_blank" rel="noopener">Seguir no Instagram ${I.arrow}</a></div>
 </div></div></div></section>`;
+
+// Nossa história: ata de fundação exposta como em museu, ao lado do texto
+// (as folhas passam conforme a rolagem do texto; arrastar e clicar para ampliar)
+const museuAtas = () => `<section class="museum" data-museum aria-labelledby="museu-titulo">
+  <div class="museum__pin">
+    <h2 id="museu-titulo" class="sr-only">Ata de fundação</h2>
+    <div class="museum__viewport" data-museum-viewport>
+      <ol class="museum__track" data-museum-track>${D.atas.map((a, i) => `
+        <li class="museum__item">
+          <button class="museum__frame" type="button" data-index="${i}" aria-label="Ampliar ${esc(a.titulo)} da ata de fundação (${i + 1} de ${D.atas.length})">
+            <img src="${href(a.img)}" alt="Ata de fundação da Colamisul — ${esc(a.titulo)}" width="708" height="1000" loading="eager" decoding="async" draggable="false">
+          </button>
+        </li>`).join('')}
+      </ol>
+    </div>
+    <div class="museum__foot">
+      <div class="museum__progress" aria-hidden="true"><span data-museum-progress></span></div>
+    </div>
+  </div>
+</section>
+<dialog class="lightbox" data-lightbox aria-label="Ata de fundação ampliada" data-lenis-prevent>
+  <div class="lightbox__stage" data-lightbox-stage><img alt="" data-lightbox-img draggable="false"></div>
+  <p class="lightbox__caption"><strong data-lightbox-title></strong> <span data-lightbox-text></span> <span class="lightbox__count" data-lightbox-count></span></p>
+  <button class="lightbox__btn lightbox__close" type="button" data-lightbox-close aria-label="Fechar">${I.close}</button>
+  <button class="lightbox__btn lightbox__prev" type="button" data-lightbox-prev aria-label="Folha anterior">${I.arrow}</button>
+  <button class="lightbox__btn lightbox__next" type="button" data-lightbox-next aria-label="Próxima folha">${I.arrow}</button>
+  <script type="application/json" data-lightbox-data>${JSON.stringify(D.atas.map(a => ({ src: href(a.grande), titulo: a.titulo, legenda: a.legenda }))).replace(/</g, '\\u003c')}</script>
+</dialog>`;
 
 /* ---------------- Páginas ---------------- */
 const pages = [];
@@ -327,7 +381,7 @@ add('/nossa-historia/', {
   title: 'Nossa história', active: '/nossa-historia/', desc: D.historia.intro[0],
   body: () => `${banner(null, D.historia.video)}
 <section class="section"><div class="container"><div class="grid">
-  <div class="s-4 m-8 l-6 reveal"><div class="art-frame sticky-media">${img(B.historiaArte, 'Colamisul — laticínios desde 1954')}</div></div>
+  <div class="s-4 m-8 l-6 museum-col">${museuAtas()}</div>
   <div class="s-4 m-8 l-5 l-start-8 prose reveal">
     ${crumbs([['Início', '/'], ['A Empresa'], ['Nossa história']]).replace('breadcrumb', 'breadcrumb breadcrumb--dark')}
     <span class="eyebrow">Sobre nós</span>
@@ -337,7 +391,7 @@ add('/nossa-historia/', {
   </div>
 </div></div></section>
 <section class="section bg-yellow"><div class="container">
-  <div class="section-head reveal"><div><span class="eyebrow">Um pouco mais da nossa história</span><h2 class="display-l t-lime">Galeria de Presidentes</h2><p class="lead">Nossa história também é construída por grandes lideranças. Conheça os presidentes que marcaram diferentes gerações da Colamisul.</p></div>${btn('Ver todos', '/presidentes/', 'btn--outline')}</div>
+  <div class="section-head reveal"><div><span class="eyebrow">Um pouco mais da nossa história</span><h2 class="display-l t-lime">Galeria de Presidentes</h2><p class="lead">A trajetória da Colamisul é construída por pessoas que, ao longo dos anos, dedicaram seu trabalho ao fortalecimento da cooperativa.</p></div>${btn('Ver todos', '/presidentes/', 'btn--outline')}</div>
   <div class="grid">${D.presidentes.slice(0, 6).map(presidentCard).join('')}</div>
 </div></section>
 ${ctaParceiro()}`,
@@ -346,8 +400,12 @@ ${ctaParceiro()}`,
 // PRESIDENTES
 add('/presidentes/', {
   title: 'Presidentes', active: '/presidentes/',
-  body: () => `${pageHero({ title: 'Galeria de Presidentes', eyebrow: 'Um pouco mais da nossa história', lead: 'Nossa história também é construída por grandes lideranças. Conheça os presidentes que marcaram diferentes gerações da Colamisul.', image: B.presidentes, trail: [['A Empresa'], ['Nossa história', '/nossa-historia/']] })}
-<section class="section"><div class="container"><div class="grid">${D.presidentes.map(presidentCard).join('')}</div></div></section>
+  body: () => `${pageHero({ title: 'Galeria de Presidentes', eyebrow: 'Um pouco mais da nossa história', lead: 'A trajetória da Colamisul é construída por pessoas que, ao longo dos anos, dedicaram seu trabalho ao fortalecimento da cooperativa.', image: B.presidentes, trail: [['A Empresa'], ['Nossa história', '/nossa-historia/']] })}
+${conselhoSection()}
+<section class="section"><div class="container">
+  <div class="section-head reveal"><div><span class="eyebrow">Desde 1954</span><h2 class="display-l t-lime">Galeria de Presidentes</h2></div></div>
+  <div class="grid">${D.presidentes.map(presidentCard).join('')}</div>
+</div></section>
 ${ctaParceiro()}`,
 });
 
@@ -393,13 +451,19 @@ add('/informacoes-gerais/', {
 });
 
 // NOTÍCIA SINGLE
+// Blocos do corpo: texto = parágrafo; { h } subtítulo; { ul } lista; { img, alt } imagem; { credito } nota final
+const articleBlock = p => typeof p === 'string' ? `<p>${esc(p)}</p>`
+  : p.h ? `<h2 class="article-h">${esc(p.h)}</h2>`
+  : p.ul ? `<ul class="article-list">${p.ul.map(li => `<li>${esc(li)}</li>`).join('')}</ul>`
+  : p.img ? `<figure class="article-figure">${img(p.img, p.alt || '')}</figure>`
+  : p.credito ? `<p class="article-credit">${esc(p.credito)}</p>` : '';
 D.noticias.forEach(n => add(n.url, {
   title: n.t, active: '/informacoes-gerais/', desc: n.corpo[0].slice(0, 155),
   body: () => `<section class="page-hero page-hero--article"><div class="container inner"><div class="grid" style="width:100%"><div class="s-4 m-8 l-8">
   ${crumbs([['Início', '/'], ['Notícias', '/informacoes-gerais/'], [n.t]])}<span class="eyebrow on-dark">${esc(n.data)}</span><h1 class="display-l">${esc(n.t)}</h1></div></div></div></section>
 <section class="section" style="padding-top:0"><div class="container"><div class="grid">
   <div class="s-4 m-8 l-10 l-start-2"><div class="article-cover">${img(n.img, n.t, 'fetchpriority="high"')}</div></div>
-  <article class="s-4 m-8 l-8 l-start-3 article-body mt-l">${n.corpo.map(p => `<p>${esc(p)}</p>`).join('')}
+  <article class="s-4 m-8 l-8 l-start-3 article-body mt-l">${n.corpo.map(articleBlock).join('')}${n.original ? `<p class="article-credit">Publicado originalmente no <a href="${n.original}" target="_blank" rel="noopener">blog da Plimper</a>.</p>` : ''}
     <div class="mt-l">${btn('Voltar para notícias', '/informacoes-gerais/', 'btn--outline')}</div></article>
 </div></div></section>
 ${mapSection()}`,
@@ -417,6 +481,7 @@ add('/produtos/', {
   </div><span style="color:var(--ink-2);font-size:.9rem">${PRODUTOS.length} produtos</span></div>
   <div class="grid">${PRODUTOS.map(productCard).join('')}</div>
 </div></section>
+${catalogoBand()}
 ${contactSection(false)}`,
 });
 
@@ -462,7 +527,8 @@ PRODUTOS.forEach((p, idx) => {
 });
 
 // INFORMATIVO
-const anos = [...new Set(D.informativos.map(i => i.ano))];
+const infos = [...D.informativos].sort((a, b) => b.ordem - a.ordem);
+const anos = [...new Set(infos.map(i => i.ano))];
 add('/informativo-colamisul/', {
   title: 'Informativo Colamisul', active: '/informativo-colamisul/',
   body: () => `${banner(B.informativos)}
@@ -473,10 +539,10 @@ add('/informativo-colamisul/', {
     <div class="chips chips--stack" data-filter="ano" role="group" aria-label="Filtrar por ano">
       <button class="chip" type="button" data-value="todos" aria-pressed="true">Todos</button>${anos.map(a => `<button class="chip" type="button" data-value="${a}" aria-pressed="false">${a}</button>`).join('')}</div>
   </div></aside>
-  <div class="s-4 m-8 l-9"><div class="grid" data-list>${D.informativos.map(i => `<div class="s-4 m-4 l-4 reveal" data-ano="${i.ano}" data-ordem="${i.ordem}" id="${i.slug}"><article class="info-card">
+  <div class="s-4 m-8 l-9"><div class="grid" data-list>${infos.map(i => `<div class="s-4 m-4 l-4 reveal" data-ano="${i.ano}" data-ordem="${i.ordem}" id="${i.slug}"><article class="info-card">
     <header><span class="pill">Informativo</span><h3>${esc(i.t)}</h3></header>
     <div class="cover">${img(i.capa, 'Capa — ' + i.t)}</div>
-    <a class="btn btn--primary btn--sm" href="${i.pdf}" target="_blank" rel="noopener">Leia Agora ${I.arrow}</a></article></div>`).join('')}</div></div>
+    <a class="btn btn--primary btn--sm" href="${href(i.pdf)}" target="_blank" rel="noopener">Leia Agora ${I.arrow}</a></article></div>`).join('')}</div></div>
 </div></div></section>
 ${ctaParceiro()}`,
 });
@@ -603,6 +669,7 @@ const redirects = [
   ...PRODUTOS.map(p => `Redirect 301 /_produtos/${p.slug}/ /produtos/${p.slug}/`),
   ...D.informativos.map(i => `Redirect 301 /informativos/${i.slug}/ /informativo-colamisul/#${i.slug}`),
   'Redirect 301 /noticias /informacoes-gerais/',
+  'Redirect 301 /2025/12/colamisul-em-foco/ /2026/01/colamisul-qualidade-que-vem-do-coracao/',
 ];
 write(path.join(OUT, '.htaccess'), `ErrorDocument 404 /404.html\n${redirects.join('\n')}\n`);
 
