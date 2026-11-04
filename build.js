@@ -264,7 +264,7 @@ const mapSection = (bg = 'bg-cream') => `<section class="section--tight ${bg}"><
   <div class="s-4 m-8 l-5 reveal">${infoBoxes()}</div>
 </div></div></section>`;
 
-const instagramBand = () => `<section class="section--tight"><div class="container"><div class="cta-band cta-band--orange reveal"><div class="grid grid--center">
+const instagramBand = () => `<section class="section--tight"><div class="container"><div class="cta-band reveal"><div class="grid grid--center">
   <div class="s-4 m-5 l-8"><span class="eyebrow on-dark">Instagram</span><h2 class="display-m">${esc(S.instagramHandle)}</h2><p class="mb-0">Mantenha-se atualizado sobre nossos lançamentos e ofertas seguindo nosso perfil no instagram!</p></div>
   <div class="s-4 m-3 l-4"><a class="btn btn--yellow" href="${S.instagram}" target="_blank" rel="noopener">Seguir no Instagram ${I.arrow}</a></div>
 </div></div></div></section>`;
@@ -479,7 +479,7 @@ add('/pontos-de-vendas/', {
   title: 'Pontos de vendas', active: '/pontos-de-vendas/',
   body: () => `${pageHero({ title: D.pontos.titulo, lead: D.pontos.d, image: B.pontos, bg: 'bg-cream' })}
 <section class="full-media">${img(B.mapaPontos, 'Mapa dos pontos de venda Colamisul')}</section>
-${ctaParceiro('orange')}`,
+${ctaParceiro()}`,
 });
 
 // SERVIÇOS AO COOPERADO
