@@ -223,14 +223,66 @@
   }
 
   /* ---------- Formulário de contato (sem backend: abre o e-mail com os dados preenchidos) ---------- */
+  // Formulário de contato: máscaras, formatação e validação com mensagens em português
+  const fmt = {
+    telefone: v => {
+      const d = v.replace(/\D/g, '').slice(0, 11);
+      if (d.length <= 2) return d.length ? '(' + d : '';
+      if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+      if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+      return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+    },
+    nome: v => v.replace(/\s+/g, ' ').trim().toLowerCase().split(' ')
+      .map((w, i) => (i && /^(da|de|do|das|dos|e)$/.test(w)) ? w : w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+    email: v => v.replace(/\s+/g, '').toLowerCase(),
+    texto: v => v.replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim()
+  };
+  const msgErro = el => {
+    const v = el.validity;
+    if (v.valueMissing) return 'Preencha este campo.';
+    if (el.name === 'nome' && (v.tooShort || !/\s/.test(el.value.trim()))) return 'Informe nome e sobrenome.';
+    if (el.name === 'email' && (v.typeMismatch || !/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(el.value))) return 'Informe um e-mail válido.';
+    if (el.name === 'telefone' && el.value && el.value.replace(/\D/g, '').length < 10) return 'Informe o telefone com DDD.';
+    if (v.tooShort) return 'Escreva pelo menos ' + el.minLength + ' caracteres.';
+    return '';
+  };
+  const checar = el => {
+    const err = document.getElementById(el.id + '-erro');
+    if (!err) return true;
+    const m = msgErro(el);
+    err.textContent = m;
+    el.setAttribute('aria-invalid', m ? 'true' : 'false');
+    return !m;
+  };
   $$('form[data-contact]').forEach(form => {
+    const campos = $$('input, textarea', form);
+    campos.forEach(el => {
+      const f = fmt[el.dataset.format];
+      if (el.dataset.format === 'telefone') el.addEventListener('input', () => { el.value = fmt.telefone(el.value); });
+      if (el.dataset.format === 'email') el.addEventListener('input', () => {
+        const n = el.value.replace(/\s+/g, '');
+        if (n !== el.value) el.value = n;
+      });
+      el.addEventListener('blur', () => { if (f && el.value) el.value = f(el.value); if (el.value || el.hasAttribute('aria-invalid')) checar(el); });
+      el.addEventListener('input', () => { if (el.getAttribute('aria-invalid') === 'true') checar(el); });
+    });
+    const msg = $('textarea', form), cont = $('.field-count', form);
+    if (msg && cont) { const upd = () => { cont.textContent = msg.value.length + '/' + msg.maxLength; }; msg.addEventListener('input', upd); upd(); }
     form.addEventListener('submit', e => {
       e.preventDefault();
-      if (!form.reportValidity()) return;
+      campos.forEach(el => { const f = fmt[el.dataset.format]; if (f && el.value) el.value = f(el.value); });
+      if (msg && cont) cont.textContent = msg.value.length + '/' + msg.maxLength;
+      const invalidos = campos.filter(el => !checar(el));
+      const st = $('.form-status', form);
+      if (invalidos.length) {
+        invalidos[0].focus();
+        if (st) { st.textContent = 'Confira os campos destacados.'; st.classList.add('is-error'); }
+        return;
+      }
       const d = Object.fromEntries(new FormData(form));
-      const body = `Nome: ${d.nome}\nTelefone: ${d.telefone}\nE-mail: ${d.email}\n\n${d.mensagem}`;
-      window.location.href = `mailto:${form.dataset.contact}?subject=${encodeURIComponent(d.assunto || 'Contato pelo site')}&body=${encodeURIComponent(body)}`;
-      const st = $('.form-status', form); if (st) st.textContent = 'Abrimos seu aplicativo de e-mail com a mensagem pronta para envio.';
+      const body = 'Nome: ' + d.nome + '\nTelefone: ' + (d.telefone || '-') + '\nE-mail: ' + d.email + '\n\n' + d.mensagem;
+      window.location.href = 'mailto:' + form.dataset.contact + '?subject=' + encodeURIComponent(d.assunto || 'Contato pelo site') + '&body=' + encodeURIComponent(body);
+      if (st) { st.classList.remove('is-error'); st.textContent = 'Abrimos seu aplicativo de e-mail com a mensagem pronta para envio.'; }
     });
   });
 

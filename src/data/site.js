@@ -17,6 +17,8 @@ module.exports = {
     address: 'Rodovia Rubens Rangel, Nº 449, Mimoso do Sul - ES, 29.400-000',
     instagram: 'https://www.instagram.com/colamisul.laticinios',
     instagramHandle: '@colamisul.laticinios',
+    // TODO: confirmar o endereço da página oficial no Facebook
+    facebook: 'https://www.facebook.com/colamisul',
     whatsapp: 'https://wa.me/28999234485',
     mapEmbed: 'https://www.google.com/maps?q=Rodovia+Rubens+Rangel,+449,+Mimoso+do+Sul+-+ES&output=embed',
   },

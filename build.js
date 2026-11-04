@@ -80,6 +80,7 @@ const I = {
   id: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h4M7 13h10M7 17h6"/></svg>',
   up: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>',
   insta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
+  fb: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21.9v-7h2.4l.4-2.9h-2.8v-1.8c0-.8.2-1.4 1.4-1.4h1.5V6.2a19 19 0 00-2.2-.1c-2.2 0-3.7 1.3-3.7 3.8V12H8v2.9h2.5v7a10 10 0 113 0z"/></svg>',
   whats: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c0-.1-.2-.2-.5-.3z"/></svg>',
 };
 const wave = (fill, pos = 'top', bg = 'transparent') => `<svg class="wave wave--${pos}" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:${bg}"><path fill="${fill}" d="${pos === 'top'
@@ -146,7 +147,7 @@ function footer() {
   </div></div>
   <div class="bottom"><div class="container">© Copyright <span data-year>2026</span> – ${S.cnpj} – ${esc(S.fullName)} – Todos os Direitos Reservados · <a href="${href('/politica-de-privacidade/')}">Política de Privacidade</a></div></div>
 </footer>
-<div class="float-actions"><a class="fa-whats" href="${S.whatsapp}" target="_blank" rel="noopener" aria-label="Fale no WhatsApp">${I.whats}</a><button class="fa-top" type="button" aria-label="Voltar ao topo">${I.up}</button></div>`;
+<div class="float-actions"><a class="fa-fb" href="${S.facebook}" target="_blank" rel="noopener" aria-label="Colamisul no Facebook">${I.fb}</a><a class="fa-insta" href="${S.instagram}" target="_blank" rel="noopener" aria-label="Colamisul no Instagram">${I.insta}</a><a class="fa-whats" href="${S.whatsapp}" target="_blank" rel="noopener" aria-label="Fale no WhatsApp">${I.whats}</a><button class="fa-top" type="button" aria-label="Voltar ao topo">${I.up}</button></div>`;
 }
 
 function page({ title, desc, active, body, depthPath }) {
@@ -235,12 +236,13 @@ const infoBoxes = () => `<div class="info-stack">
 </div>`;
 
 const contactForm = () => `<form class="form-card" data-contact="${S.email}" novalidate>
+  <p class="form-note"><span class="req" aria-hidden="true">*</span> Campos obrigatórios</p>
   <div class="grid grid--dense">
-    <div class="field s-4 m-4 l-6"><label for="f-nome">Nome</label><input id="f-nome" name="nome" required autocomplete="name"></div>
-    <div class="field s-4 m-4 l-6"><label for="f-tel">Telefone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel"></div>
-    <div class="field s-4 m-8 l-12"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
-    <div class="field s-4 m-8 l-12"><label for="f-assunto">Assunto</label><input id="f-assunto" name="assunto"></div>
-    <div class="field s-4 m-8 l-12"><label for="f-msg">Sua mensagem</label><textarea id="f-msg" name="mensagem" required></textarea></div>
+    <div class="field s-4 m-4 l-6"><label for="f-nome">Nome <span class="req" aria-hidden="true">*</span></label><input id="f-nome" name="nome" type="text" required minlength="3" maxlength="80" autocomplete="name" autocapitalize="words" placeholder="Seu nome completo" data-format="nome" aria-describedby="f-nome-erro"><span class="field-error" id="f-nome-erro"></span></div>
+    <div class="field s-4 m-4 l-6"><label for="f-tel">Telefone</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" maxlength="15" autocomplete="tel-national" placeholder="(28) 99999-9999" data-format="telefone" aria-describedby="f-tel-erro"><span class="field-error" id="f-tel-erro"></span></div>
+    <div class="field s-4 m-8 l-12"><label for="f-email">E-mail <span class="req" aria-hidden="true">*</span></label><input id="f-email" name="email" type="email" required maxlength="120" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="voce@email.com" data-format="email" aria-describedby="f-email-erro"><span class="field-error" id="f-email-erro"></span></div>
+    <div class="field s-4 m-8 l-12"><label for="f-assunto">Assunto</label><input id="f-assunto" name="assunto" type="text" maxlength="100" placeholder="Sobre o que você quer falar?" data-format="texto"></div>
+    <div class="field s-4 m-8 l-12"><label for="f-msg">Sua mensagem <span class="req" aria-hidden="true">*</span></label><textarea id="f-msg" name="mensagem" required minlength="10" maxlength="1000" placeholder="Escreva sua mensagem" data-format="texto" aria-describedby="f-msg-erro f-msg-cont"></textarea><span class="field-meta"><span class="field-error" id="f-msg-erro"></span><span class="field-count" id="f-msg-cont">0/1000</span></span></div>
   </div>
   <button class="btn btn--primary" type="submit" style="width:100%;justify-content:center">Enviar ${I.arrow}</button>
   <p class="form-status" role="status"></p>
