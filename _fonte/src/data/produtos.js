@@ -18,7 +18,7 @@ const doceIng = 'Leite, açúcar, glicose, amido e conservante sorbato de potás
 module.exports = [
   {
     slug: 'requeijao', nome: 'Requeijão Colamisul', cat: 'Requeijão',
-    img: U + '2024/07/requeijao-colamisul-1-1024x683.webp', alt: 'Requeijao Colamisul em barra',
+    img: '/assets/img/produtos/requeijao.webp', alt: 'Requeijao Colamisul em barra',
     chamada: 'Cremosidade que conquista.',
     desc: 'Com textura aveludada e sabor equilibrado, nosso requeijão em barra é versátil e delicioso. Indispensável no café da manhã e em lanches, ele também é o segredo culinário para dar um toque especial de cremosidade nas receitas dos melhores chefs.',
     tabela: {
@@ -36,7 +36,7 @@ module.exports = [
   },
   {
     slug: 'queijo-mussarela-500g', nome: 'Queijo Mussarela 500 g', cat: 'Queijos',
-    img: U + '2024/07/queijo-mussarela-500g-2-1024x683.webp', alt: 'Queijo Mussarela Colamisul 500 g',
+    img: '/assets/img/produtos/queijo-mussarela-500g.webp', alt: 'Queijo Mussarela Colamisul 500 g',
     chamada: 'Cooperação em cada fatia.', desc: queijoTxt,
     tabela: {
       titulo: 'Queijo Mussarela — peça 500 g',
@@ -47,7 +47,7 @@ module.exports = [
   },
   {
     slug: 'queijo-mussarela-2-800kg', nome: 'Queijo Mussarela 2,8 kg', cat: 'Queijos',
-    img: U + '2024/07/queijo-mussarela-2-800kg-1-1024x683.webp', alt: 'Queijo Mussarela Colamisul 2,8 kg',
+    img: '/assets/img/produtos/queijo-mussarela-2-800kg.webp', alt: 'Queijo Mussarela Colamisul 2,8 kg',
     chamada: 'Cooperação em cada fatia.', desc: queijoTxt,
     tabela: {
       titulo: 'Queijo Mussarela — peça 2,8 kg',
@@ -58,7 +58,7 @@ module.exports = [
   },
   {
     slug: 'queijo-minas-padrao', nome: 'Queijo Minas Padrão', cat: 'Queijos',
-    img: U + '2024/07/queijo-minas-padrao-1-1024x683.webp', alt: 'Queijo Minas Padrao Colamisul',
+    img: '/assets/img/produtos/queijo-minas-padrao.webp', alt: 'Queijo Minas Padrao Colamisul',
     chamada: 'Cooperação em cada fatia.',
     desc: 'Nossos queijos são produzidos com leite fresco e seguem receitas tradicionais, resultando em um sabor inconfundível. Perfeitos para o café da manhã, receitas dos melhores chefs ou tábuas especiais, unindo a tradição do campo com a qualidade Colamisul.',
     tabela: {
@@ -76,7 +76,7 @@ module.exports = [
   },
   {
     slug: 'queijo-minas-frescal', nome: 'Queijo Minas Frescal', cat: 'Queijos',
-    img: U + '2024/07/queijo-minas-frescal-1-1024x683.webp', alt: 'Queijo Minas Frescal Colamisul',
+    img: '/assets/img/produtos/queijo-minas-frescal.webp', alt: 'Queijo Minas Frescal Colamisul',
     chamada: 'Cooperação em cada fatia.',
     desc: 'Nossos queijos são produzidos com leite fresco e seguem receitas tradicionais, garantindo leveza e frescor. Perfeitos para o café da manhã, dietas equilibradas, receitas dos melhores chefs ou tábuas especiais, oferecendo sabor suave para todos os momentos.',
     tabela: {
@@ -94,7 +94,7 @@ module.exports = [
   },
   {
     slug: 'manteiga-com-sal-200g', nome: 'Manteiga com Sal 200 g', cat: 'Manteiga',
-    img: U + '2023/12/manteiga-com-sal-200g-1-1024x683.webp', alt: 'Manteiga Dourada com Sal Colamisul 200 g',
+    img: '/assets/img/produtos/manteiga-com-sal-200g.webp', alt: 'Manteiga Dourada com Sal Colamisul 200 g',
     chamada: 'Tradição que você reconhece no sabor.',
     desc: 'A tradicional Manteiga Dourada Colamisul conquista gerações com seu sabor autêntico e cremosidade única. A escolha certa para padarias, cafés, restaurantes e lares que valorizam qualidade superior e aquele toque de tradição indispensável em cada receita.',
     tabela: {
@@ -108,7 +108,7 @@ module.exports = [
   },
   {
     slug: 'leite-pasteurizado-integral', nome: 'Leite Pasteurizado Integral', cat: 'Leites',
-    img: U + '2023/12/leite-pasteurizado-integral-2-1024x683.webp', alt: 'Leite Pasteurizado Integral Colamisul 1 L',
+    img: '/assets/img/produtos/leite-pasteurizado-integral.webp', alt: 'Leite Pasteurizado Integral Colamisul 1 L',
     chamada: 'A escolha natural de quem entende de sabor.',
     desc: 'Nosso leite vem direto de famílias produtoras da região, passando por rigorosos padrões de qualidade e controle. É a fonte ideal de nutrição para quem busca sabor verdadeiro, frescor garantido e total confiança para o consumo no dia a dia.',
     tabela: {
@@ -126,7 +126,7 @@ module.exports = [
   },
   {
     slug: 'leite-desnatado-pasteurizado', nome: 'Leite Pasteurizado Desnatado', cat: 'Leites',
-    img: U + '2023/12/leite-desnatado-pasteurizado-1-1024x683.webp', alt: 'Leite Pasteurizado Desnatado Colamisul 1 L',
+    img: '/assets/img/produtos/leite-desnatado-pasteurizado.webp', alt: 'Leite Pasteurizado Desnatado Colamisul 1 L',
     chamada: 'A escolha natural de quem entende de sabor.',
     desc: 'Nosso leite vem direto de famílias produtoras da região, com rigorosos padrões de qualidade e controle. A opção perfeita para quem busca leveza sem abrir mão do sabor e da confiança, ideal para dietas balanceadas e consumo diário com saúde.',
     tabela: {
@@ -169,7 +169,7 @@ module.exports = [
   },
   {
     slug: 'doce-de-leite-tablet', nome: 'Doce de Leite Tablete', cat: 'Doce de Leite',
-    img: U + '2023/12/doce-de-leite-tablet-1-1024x683.webp', alt: 'Doce de Leite Colamisul em tablete',
+    img: '/assets/img/produtos/doce-de-leite-tablet.webp', alt: 'Doce de Leite Colamisul em tablete',
     chamada: 'Doce de leite com sabor que conta nossa história.',
     desc: 'Feito com ingredientes selecionados, o Doce de Leite Colamisul tem textura firme e sabor caseiro que remetem à infância. Perfeita para compartilhar momentos doces ou para compor a mesa de quem não abre mão da tradição.',
     tabela: {
@@ -187,7 +187,7 @@ module.exports = [
   },
   {
     slug: 'doce-de-leite-pastoso', nome: 'Doce de Leite Pastoso 300 g', cat: 'Doce de Leite',
-    img: U + '2023/12/doce-de-leite-pastoso-350g-1-1024x683.webp', alt: 'Doce de Leite Pastoso Colamisul pote 300 g',
+    img: '/assets/img/produtos/doce-de-leite-pastoso.webp', alt: 'Doce de Leite Pastoso Colamisul pote 300 g',
     chamada: 'Doce de leite com sabor que conta nossa história.',
     desc: 'Feito com ingredientes selecionados, o Doce de Leite Colamisul tem textura cremosa e sabor caseiro que remetem à infância. Para comer de colher, passar no pão ou rechear bolos e tortas, trazendo doçura na medida certa para o seu dia.',
     tabela: {
@@ -205,7 +205,7 @@ module.exports = [
   },
   {
     slug: 'doce-de-leite-balde-48kg', nome: 'Doce de Leite Balde 4,8 kg', cat: 'Doce de Leite',
-    img: U + '2022/08/doce-de-leite-balde-4-8kg-1024x683.webp', alt: 'Doce de Leite Pastoso Colamisul - balde 4,8 kg',
+    img: '/assets/img/produtos/doce-de-leite-balde-48kg.webp', alt: 'Doce de Leite Pastoso Colamisul - balde 4,8 kg',
     chamada: 'Doce de leite com sabor que conta nossa história.',
     desc: 'Feito com ingredientes selecionados, o Doce de Leite Colamisul tem aquela textura cremosa e sabor caseiro que remetem à infância. Ideal para comer de colher, passar no pão ou rechear bolos e tortas, trazendo doçura na medida certa para o seu dia.',
     tabela: {
