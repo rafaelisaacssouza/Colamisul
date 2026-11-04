@@ -8,6 +8,8 @@ const fs = require('fs');
 const path = require('path');
 
 const RELATIVE = process.argv.includes('--relative');
+// Prefixo para hospedar numa subpasta (ex.: GitHub Pages em /Colamisul). Vazio = raiz do domínio.
+const BASE = (process.env.BASE_PATH || '').replace(/\/+$/, '');
 const OUT = path.join(__dirname, 'dist');
 const SRC = path.join(__dirname, 'src');
 
@@ -60,7 +62,7 @@ let currentDepth = 0;
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const href = p => {
   if (/^(https?:|mailto:|tel:|#)/.test(p)) return p;
-  if (!RELATIVE) return p;
+  if (!RELATIVE) return p.startsWith('/') ? BASE + p : p;
   const pre = currentDepth ? '../'.repeat(currentDepth) : './';
   const clean = p.replace(/^\//, '');
   if (!clean || clean.endsWith('/')) return pre + clean + 'index.html';
@@ -557,7 +559,7 @@ ${contactSection(true)}`,
 add('/politica-de-privacidade/', {
   title: 'Política de Privacidade', active: '',
   body: () => `${pageHero({ title: 'Política de Privacidade', eyebrow: 'LGPD', image: B.privacidade })}
-<section class="section"><div class="container"><div class="grid"><article class="s-4 m-8 l-8 l-start-3 prose">${PRIVACIDADE}</article></div></div></section>
+<section class="section"><div class="container"><div class="grid"><article class="s-4 m-8 l-8 l-start-3 prose">${PRIVACIDADE.replace(/href="(\/[^"]*)"/g, (m, p) => `href="${href(p)}"`)}</article></div></div></section>
 ${instagramBand()}`,
 });
 
