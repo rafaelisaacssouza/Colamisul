@@ -108,8 +108,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .btn--yellow { background: var(--yellow); color: var(--ink); }
 .btn--yellow:hover { background: #fff; }
 .btn.is-disabled { cursor: default; }
-#catalogo .cta-band p { margin-top: 12px; }
-.btn.is-disabled:hover { background: var(--yellow); transform: none; }
+.btn.is-disabled:hover { background: transparent; color: #fff; transform: none; }
 .btn--outline { border-color: var(--green); color: var(--green); background: transparent; }
 .btn--outline:hover { background: var(--green); color: #fff; }
 .btn--ghost-light { border-color: rgba(255,255,255,.7); color: #fff; }

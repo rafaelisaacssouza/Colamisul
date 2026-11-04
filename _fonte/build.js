@@ -252,12 +252,13 @@ const ctaParceiro = (tone = '') => `<section class="section--tight"><div class="
 // Produtos: chamada para baixar o catálogo (sem link definido, o botão fica desativado)
 const catalogoBand = () => {
   const botao = S.catalogo
-    ? `<a class="btn btn--yellow" href="${href(S.catalogo)}" target="_blank" rel="noopener" download>Baixar catálogo ${I.doc}</a>`
-    : `<span class="btn btn--yellow is-disabled" aria-disabled="true" title="Catálogo disponível em breve">Baixar catálogo ${I.doc}</span>`;
-  return `<section class="section--tight bg-cream" id="catalogo"><div class="container"><div class="cta-band reveal"><div class="grid grid--center">
-  <div class="s-4 m-5 l-8"><span class="eyebrow on-dark">Catálogo</span><h2 class="display-m">Tudo o que você precisa, em um só lugar.</h2><p class="mb-0">Baixe o catálogo Colamisul e tenha nossa linha de produtos sempre à mão.</p></div>
-  <div class="s-4 m-3 l-4">${botao}</div>
-</div></div></div></section>`;
+    ? `<a class="btn btn--ghost-light" href="${href(S.catalogo)}" target="_blank" rel="noopener" download>Baixar catálogo ${I.doc}</a>`
+    : `<span class="btn btn--ghost-light is-disabled" aria-disabled="true" title="Catálogo disponível em breve">Baixar catálogo ${I.doc}</span>`;
+  return `${wave('#007A2F', 'top', 'var(--cream)')}
+<section class="section bg-green" id="catalogo"><div class="container"><div class="grid">
+  <div class="s-4 m-6 m-start-2 l-8 l-start-3 reveal sust-intro"><h2 class="display-l">Tudo o que você precisa, em um só lugar.</h2><p class="lead" style="color:rgba(255,255,255,.9)">Baixe o catálogo Colamisul e tenha nossa linha de produtos sempre à mão.</p><div class="mt-l">${botao}</div></div>
+</div></div></section>
+${wave('#007A2F', 'bottom', 'var(--cream)')}`;
 };
 
 const infoBoxes = () =>`<div class="info-stack">
