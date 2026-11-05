@@ -206,8 +206,8 @@ a.card:hover .card__media img { transform: scale(1.05); }
 .card__foot { margin-top: auto; padding-top: 8px; }
 .tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green); background: rgba(0,158,61,.1); padding: 6px 10px; border-radius: 999px; align-self: flex-start; }
 
-.product-card .card__media { aspect-ratio: 3 / 2; background: linear-gradient(160deg, #fff 0%, var(--cream) 100%); }
-.product-card .card__media img { object-fit: contain; padding: 18px; }
+.product-card .card__media { --pad: 18px; aspect-ratio: 3 / 2; padding: var(--pad); background: linear-gradient(160deg, #fff 0%, var(--cream) 100%); }
+.product-card .card__media img { object-fit: cover; border-radius: calc(var(--radius) - var(--pad)) calc(var(--radius) - var(--pad)) 0 0; } /* cantos concêntricos ao card */
 .product-card .chamada { font-weight: 700; font-size: .95rem; margin: 0; }
 
 .recipe-card .card__media { aspect-ratio: 16 / 11; }
