@@ -47,7 +47,8 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 /* Lenis (smooth scroll) */
 html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
+/* Com o Lenis ativo, o scroll nativo precisa ser instantâneo: o ScrollTrigger rola até o topo para medir ao redimensionar */
+html.lenis { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
 .lenis.lenis-scrolling iframe { pointer-events: none; }
