@@ -330,7 +330,7 @@
         unzoom();
         const d = data[idx];
         im.src = d.src;
-        im.alt = 'Ata de fundação da Colamisul — ' + d.titulo;
+        im.alt = 'Ata de fundação da Colamisul: ' + d.titulo;
         $('[data-lightbox-title]', dlg).textContent = d.titulo;
         $('[data-lightbox-text]', dlg).textContent = d.legenda;
         $('[data-lightbox-count]', dlg).textContent = `${idx + 1} / ${data.length}`;

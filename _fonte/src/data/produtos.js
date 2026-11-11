@@ -24,7 +24,7 @@ module.exports = [
     tabela: {
       titulo: 'Requeijão',
       ingredientes: 'Massa para produtos lácteos fundidos (leite desnatado e ácido lático), creme de leite, cloreto de sódio (sal), regulador de acidez bicarbonato de sódio (INS 500ii) e conservante sorbato de potássio (INS 292).',
-      embalagem: 'Peça com aprox. 500 g · Caixa com 36 unidades · Porção: 30 g',
+      embalagem: 'Peça com aprox. 500 g · Porção: 30 g (1 fatia)',
       cols: ['100 g', '30 g'],
       rows: [
         ['Valor energético (kcal)', '330', '99', '5'], ['Carboidratos (g)', '5,3', '1,6', '1'], ['Açúcares totais (g)', '5,3', '1,6', '—'],
@@ -39,9 +39,9 @@ module.exports = [
     img: '/assets/img/produtos/queijo-mussarela-500g.webp', alt: 'Queijo Mussarela Colamisul 500 g',
     chamada: 'Cooperação em cada fatia.', desc: queijoTxt,
     tabela: {
-      titulo: 'Queijo Mussarela — peça 500 g',
+      titulo: 'Queijo Mussarela 500 g',
       ingredientes: 'Leite pasteurizado, cloreto de sódio (sal), cloreto de cálcio, coagulante e fermento lático.',
-      embalagem: 'Peça com aprox. 500 g · Caixa com 25 unidades · Porção: 30 g (1 fatia)',
+      embalagem: 'Peça com aprox. 500 g · Porção: 30 g (1 fatia)',
       cols: ['100 g', '30 g'], rows: mussarelaRows, notas: [FOOT, PESAR],
     },
   },
@@ -50,7 +50,7 @@ module.exports = [
     img: '/assets/img/produtos/queijo-mussarela-2-800kg.webp', alt: 'Queijo Mussarela Colamisul 2,8 kg',
     chamada: 'Cooperação em cada fatia.', desc: queijoTxt,
     tabela: {
-      titulo: 'Queijo Mussarela — peça 2,8 kg',
+      titulo: 'Queijo Mussarela 2,8 kg',
       ingredientes: 'Leite pasteurizado, cloreto de sódio (sal), cloreto de cálcio, coagulante e fermento lático.',
       embalagem: 'Peça com aprox. 2,8 kg · Porção: 30 g (1 fatia)',
       cols: ['100 g', '30 g'], rows: mussarelaRows, notas: [FOOT, PESAR],
@@ -93,12 +93,12 @@ module.exports = [
     },
   },
   {
-    slug: 'manteiga-com-sal-200g', nome: 'Manteiga com Sal 200 g', cat: 'Manteiga',
+    slug: 'manteiga-com-sal-200g', nome: 'Manteiga Comum com Sal 200 g', cat: 'Manteiga',
     img: '/assets/img/produtos/manteiga-com-sal-200g.webp', alt: 'Manteiga Dourada com Sal Colamisul 200 g',
     chamada: 'Tradição que você reconhece no sabor.',
     desc: 'A tradicional Manteiga Dourada Colamisul conquista gerações com seu sabor autêntico e cremosidade única. A escolha certa para padarias, cafés, restaurantes e lares que valorizam qualidade superior e aquele toque de tradição indispensável em cada receita.',
     tabela: {
-      titulo: 'Manteiga Comum com Sal',
+      titulo: 'Manteiga Comum com Sal 200 g',
       ingredientes: 'Creme de leite pasteurizado e cloreto de sódio.',
       embalagem: 'Pote com 200 g · Porção: 10 g (1 colher de sopa)',
       cols: ['100 g', '10 g'],
@@ -143,13 +143,13 @@ module.exports = [
     },
   },
   {
-    slug: 'iogurte-integral-morango', nome: 'Iogurte Integral Morango', cat: 'Iogurtes',
+    slug: 'iogurte-integral-morango', nome: 'Iogurte Integral com Preparado de Morango', cat: 'Iogurtes',
     img: '/assets/img/produtos/iogurte-integral-morango.webp', alt: 'Iogurte Integral com Preparado de Morango Colamisul 850 g',
     chamada: 'Tem fruta de verdade. E isso muda tudo.',
     desc: 'Nossos iogurtes entregam autenticidade no sabor e confiança desde sua origem. Feitos com leite fresco de produtores locais e frutas de verdade, eles oferecem uma experiência de consumo única que fideliza clientes e valoriza sua loja ou sua mesa.',
     tabela: {
       titulo: 'Iogurte Integral com Preparado de Morango',
-      ingredientes: 'Leite, açúcar, preparado de morango (água, açúcar, morango, amido modificado, aroma idêntico ao natural de morango, acidulante ácido cítrico INS 330, goma guar INS 412, carboximetilcelulose INS 466, conservante sorbato de potássio INS 202, corante natural carmim de cochonilha INS 120), fermento lático e estabilizante (amido modificado, gelatina INS 428 e goma guar INS 412).',
+      ingredientes: 'Leite, açúcar, preparado de morango (água, açúcar, morango, amido modificado, aroma idêntico ao natural de morango, acidulante ácido cítrico INS 330, goma Guar INS 412, carboximetilcelulose INS 466, conservante sorbato de potássio INS 202, corante natural carmim de cochonilha INS 120), fermento lático e estabilizante (amido modificado, gelatina INS 428 e goma Guar INS 412).',
       embalagem: 'Frasco com 850 g · Porção: 200 g (1 copo)',
       cols: ['100 g', '200 g'], rows: iogurteRows, notas: [FOOT],
     },
@@ -162,7 +162,7 @@ module.exports = [
     tabela: {
       titulo: 'Iogurte Integral com Granulado Sabor Chocolate',
       // Texto da agência (pág. 15) com "lecitina" e "glaceante" corrigidos (vieram como "lectina" e "claceante")
-      ingredientes: 'Leite, açúcar, granulado sabor chocolate (açúcar, gordura vegetal hidrogenada, cacau em pó, amido de milho, estabilizantes lecitina de soja e mono e diglicerídeo de ácidos graxos, sal, glaceante, talco, xarope de glicose, conservante sorbato de potássio e aroma artificial de baunilha), fermento lático e estabilizante (amido modificado, gelatina INS 428 e goma guar INS 412).',
+      ingredientes: 'Leite, açúcar, granulado sabor chocolate (açúcar, gordura vegetal hidrogenada, cacau em pó, amido de milho, estabilizantes lecitina de soja e mono e diglicerídeo de ácidos graxos, sal, glaceante, talco, xarope de glicose, conservante sorbato de potássio e aroma artificial de baunilha), fermento lático e estabilizante (amido modificado, gelatina INS 428 e goma Guar INS 412).',
       embalagem: 'Frasco com 850 g · Porção: 200 g (1 copo)',
       cols: ['100 g', '200 g'], rows: iogurteRows, notas: [FOOT],
     },

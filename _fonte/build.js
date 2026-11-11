@@ -117,7 +117,7 @@ function navMobile() {
 function header(active) {
   return `<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 <header class="site-header"><div class="container bar">
-  <a class="brand" href="${href('/')}" aria-label="Colamisul — página inicial"><img src="${href(S.logo)}" alt="Colamisul" width="172" height="46"></a>
+  <a class="brand" href="${href('/')}" aria-label="Colamisul, página inicial"><img src="${href(S.logo)}" alt="Colamisul" width="172" height="46"></a>
   ${navDesktop(active)}
   <a class="btn btn--primary btn--sm header-cta" href="${href('/contato/')}">Contato</a>
   <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="mobile-nav" aria-expanded="false">${I.menu}</button>
@@ -135,7 +135,7 @@ function footer() {
     <div class="s-4 m-8 l-4">
       <img class="logo" src="${href(S.logoBranca)}" alt="Colamisul" width="180" height="48">
       <p>${esc(S.tagline)}</p>
-      <img src="${href(S.seloCoop)}" alt="Somos Coop" width="64" style="width:64px">
+      <a href="https://portal.ocbes.coop.br/" target="_blank" rel="noopener" style="display:inline-block"><img src="${href(S.seloCoop)}" alt="Somos Coop: site da OCB/ES" width="64" style="width:64px"></a>
     </div>
     <nav class="s-2 m-3 l-3" aria-label="Institucional"><h4>Institucional</h4><ul>${li(col1)}</ul></nav>
     <nav class="s-2 m-2 l-2" aria-label="Conteúdo"><h4>Navegue</h4><ul>${li(col2)}</ul></nav>
@@ -150,14 +150,14 @@ function footer() {
       <div class="socials"><a href="${S.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${I.insta}</a><a href="${S.whatsapp}" target="_blank" rel="noopener" aria-label="WhatsApp">${I.whats}</a></div>
     </div>
   </div></div>
-  <div class="bottom"><div class="container">© Copyright <span data-year>2026</span> – ${esc(S.fullName)} – CNPJ: ${S.cnpj} – Todos os direitos reservados. · <a href="${href('/politica-de-privacidade/')}">Política de Privacidade</a></div></div>
+  <div class="bottom"><div class="container">© Copyright <span data-year>2026</span> · ${esc(S.fullName)} · CNPJ: ${S.cnpj} · Todos os direitos reservados. · <a href="${href('/politica-de-privacidade/')}">Política de Privacidade</a></div></div>
 </footer>
 <div class="float-actions"><a class="fa-fb" href="${S.facebook}" target="_blank" rel="noopener" aria-label="Colamisul no Facebook">${I.fb}</a><a class="fa-insta" href="${S.instagram}" target="_blank" rel="noopener" aria-label="Colamisul no Instagram">${I.insta}</a><a class="fa-whats" href="${S.whatsapp}" target="_blank" rel="noopener" aria-label="Fale no WhatsApp">${I.whats}</a><button class="fa-top" type="button" aria-label="Voltar ao topo">${I.up}</button></div>`;
 }
 
 function page({ title, desc, active, body, depthPath }) {
   currentDepth = depthPath.split('/').filter(Boolean).length;
-  const fullTitle = title ? `${title} – Colamisul | Cooperativa de Laticínios de Mimoso do Sul` : 'Colamisul | Cooperativa de Laticínios de Mimoso do Sul';
+  const fullTitle = title ? `${title} | Colamisul | Cooperativa de Laticínios de Mimoso do Sul` : 'Colamisul | Cooperativa de Laticínios de Mimoso do Sul';
   return `<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -312,7 +312,7 @@ const museuAtas = () => `<section class="museum" data-museum aria-labelledby="mu
       <ol class="museum__track" data-museum-track>${D.atas.map((a, i) => `
         <li class="museum__item">
           <button class="museum__frame" type="button" data-index="${i}" aria-label="Ampliar ${esc(a.titulo)} da ata de fundação (${i + 1} de ${D.atas.length})">
-            <img src="${href(a.img)}" alt="Ata de fundação da Colamisul — ${esc(a.titulo)}" width="708" height="1000" loading="eager" decoding="async" draggable="false">
+            <img src="${href(a.img)}" alt="Ata de fundação da Colamisul: ${esc(a.titulo)}" width="708" height="1000" loading="eager" decoding="async" draggable="false">
           </button>
         </li>`).join('')}
       </ol>
@@ -343,7 +343,7 @@ add('/', {
   <picture><source media="(max-width: 767px)" srcset="${href(B.home.mobile)}"><img src="${href(B.home.desktop)}" alt="Linha de produtos Colamisul: leites, iogurtes, queijos, requeijão e doce de leite" fetchpriority="high"></picture>
 </section>
 <section class="section" id="sobre"><div class="container"><div class="grid grid--center">
-  <div class="s-4 m-8 l-6 reveal"><div class="art-frame">${img(B.historiaArte, 'Colamisul — laticínios desde 1954')}</div></div>
+  <div class="s-4 m-8 l-6 reveal"><div class="art-frame">${img(B.historiaArte, 'Colamisul, laticínios desde 1954')}</div></div>
   <div class="s-4 m-8 l-5 l-start-8 reveal">
     <span class="eyebrow">Sobre nós</span>
     <h2 class="display-l t-lime">Nossa história</h2>
@@ -415,7 +415,7 @@ add('/missao-visao-e-valores/', {
   title: 'Missão, Visão e Valores', active: '/missao-visao-e-valores/',
   body: () => `${pageHero({ title: 'Missão, Visão e Valores', eyebrow: 'Propósito', image: B.mvv, trail: [['A Empresa']] })}
 <section class="section" style="padding-top:0"><div class="container"><div class="grid">
-  <div class="s-4 m-8 l-4 l-start-2 reveal"><div class="media-frame sticky-media media-frame--tall">${img(B.mvvVertical, 'Colamisul — propósito')}</div></div>
+  <div class="s-4 m-8 l-4 l-start-2 reveal"><div class="media-frame sticky-media media-frame--tall">${img(B.mvvVertical, 'Colamisul: propósito')}</div></div>
   <ol class="s-4 m-8 l-6 l-start-7 vtimeline">
     ${D.mvv.map(m => `<li class="reveal"><span class="dot">${m.n}</span><h2 class="display-s t-green">${m.t}</h2>${m.d ? `<p>${esc(m.d)}</p>` : `<ul class="values-list">${m.list.map(([k, v]) => `<li><strong>${k}:</strong> ${esc(v)}</li>`).join('')}</ul>`}</li>`).join('')}
   </ol>
@@ -432,7 +432,7 @@ add('/responsabilidade-social-e-ambiental/', {
   <div class="s-4 m-8 l-8 l-start-3 prose reveal">${R.ambiental.map(p => `<p>${esc(p)}</p>`).join('')}</div>
 </div></div></section>
 <section class="section bg-lime"><div class="container"><div class="grid">
-  <div class="s-4 m-8 l-6 reveal"><div class="media-frame travel-media media-frame--tall">${img(B.responsabilidade2, 'Cooperativismo Colamisul')}</div></div>
+  <div class="s-4 m-8 l-6 reveal"><div class="media-frame travel-media media-frame--tall media-frame--top">${img(B.responsabilidade2, 'Cooperativismo Colamisul')}</div></div>
   <div class="s-4 m-8 l-5 l-start-8 reveal on-lime">
     <span class="eyebrow on-dark">Cooperativismo</span>
     <h2 class="display-l">${esc(R.coopTitulo)}</h2>
@@ -513,7 +513,7 @@ PRODUTOS.forEach((p, idx) => {
     </dl>
   </div>
   <div class="s-4 m-8 l-7 l-start-6 reveal">
-    <div class="table-wrap"><table class="nutri"><caption class="sr-only">Informação Nutricional — ${esc(t.titulo)}</caption>
+    <div class="table-wrap"><table class="nutri"><caption class="sr-only">Informação Nutricional: ${esc(t.titulo)}</caption>
       <thead><tr><th scope="col">Descrição</th><th scope="col">${t.cols[0]}</th><th scope="col">${t.cols[1]}</th><th scope="col">%VD*</th></tr></thead>
       <tbody>${t.rows.map(r => `<tr><th scope="row" style="font-weight:400">${esc(r[0])}</th><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody>
     </table></div>
@@ -542,7 +542,7 @@ add('/informativo-colamisul/', {
   </div></aside>
   <div class="s-4 m-8 l-9"><div class="grid" data-list>${infos.map(i => `<div class="s-4 m-4 l-4 reveal" data-ano="${i.ano}" data-ordem="${i.ordem}" id="${i.slug}"><article class="info-card">
     <header><span class="pill">Informativo</span><h3>${esc(i.t)}</h3></header>
-    <div class="cover">${img(i.capa, 'Capa — ' + i.t)}</div>
+    <div class="cover">${img(i.capa, 'Capa: ' + i.t)}</div>
     <a class="btn btn--primary btn--sm" href="${href(i.pdf)}" target="_blank" rel="noopener">Leia Agora ${I.arrow}</a></article></div>`).join('')}</div></div>
 </div></div></section>
 ${ctaParceiro()}`,

@@ -69,7 +69,7 @@ module.exports = {
     video: 'n13HjpLI0wg', // vídeo do YouTube no topo de /nossa-historia/
     intro: [
       'A Colamisul nasceu do sonho coletivo de produtores agropecuários que acreditavam na força da união para transformar realidades.',
-      'Em 24 de janeiro de 1954, em Mimoso do Sul – ES, foi fundada a Cooperativa de Laticínios de Mimoso do Sul com um objetivo claro: fortalecer o setor leiteiro local por meio da organização produtiva, do ganho de escala e da criação de uma estrutura justa, sustentável e próspera para todos.',
+      'Em 24 de janeiro de 1954, em Mimoso do Sul (ES), foi fundada a Cooperativa de Laticínios de Mimoso do Sul com um objetivo claro: fortalecer o setor leiteiro local por meio da organização produtiva, do ganho de escala e da criação de uma estrutura justa, sustentável e próspera para todos.',
     ],
     rest: [
       'Na época, o café ainda dominava a paisagem agrícola da região, mas a vocação leiteira começava a nascer em terras antes pouco aproveitadas. Com o crescimento da pecuária, surgia também a necessidade de dar destino à produção de leite e foi aí que a Colamisul teve sua operação iniciada, investindo em estrutura, logística e industrialização. A primeira usina de laticínios entrou em operação em 1959, marcando o início de uma trajetória que uniu campo e cidade, tradição e futuro.',
@@ -193,10 +193,10 @@ module.exports = {
 
   // ordem = ano * 100 + mês (ordenação entre anos). Jan–abr/2026: PDFs ainda no servidor antigo (muito grandes).
   informativos: [
-    { slug: 'informativo-abril', t: 'Informativo – Abril 2026', ano: '2026', ordem: 202604, pdf: PDF + '2026/07/INFORMATIVO-ABRIL.pdf', capa: U + '2026/04/INFORMATIVO-ABRIL.jpg' },
-    { slug: 'informativo-marco', t: 'Informativo – Março 2026', ano: '2026', ordem: 202603, pdf: PDF + '2026/07/INFORMATIVO-MARCO.pdf', capa: U + '2026/04/INFORMATIVO-MARCO.jpg' },
-    { slug: 'informativo-fevereiro', t: 'Informativo – Fevereiro 2026', ano: '2026', ordem: 202602, pdf: PDF + '2026/07/INFORMATIVO-FEVEREIRO.pdf', capa: U + '2026/04/INFORMATIVO-FEVEREIRO.jpg' },
-    { slug: 'informativo-janeiro', t: 'Informativo – Janeiro 2026', ano: '2026', ordem: 202601, pdf: PDF + '2026/07/INFORMATIVO-JANEIRO.pdf', capa: U + '2026/04/INFORMATIVO-JANEIRO.jpg' },
+    { slug: 'informativo-abril', t: 'Informativo Abril 2026', ano: '2026', ordem: 202604, pdf: PDF + '2026/07/INFORMATIVO-ABRIL.pdf', capa: U + '2026/04/INFORMATIVO-ABRIL.jpg' },
+    { slug: 'informativo-marco', t: 'Informativo Março 2026', ano: '2026', ordem: 202603, pdf: PDF + '2026/07/INFORMATIVO-MARCO.pdf', capa: U + '2026/04/INFORMATIVO-MARCO.jpg' },
+    { slug: 'informativo-fevereiro', t: 'Informativo Fevereiro 2026', ano: '2026', ordem: 202602, pdf: PDF + '2026/07/INFORMATIVO-FEVEREIRO.pdf', capa: U + '2026/04/INFORMATIVO-FEVEREIRO.jpg' },
+    { slug: 'informativo-janeiro', t: 'Informativo Janeiro 2026', ano: '2026', ordem: 202601, pdf: PDF + '2026/07/INFORMATIVO-JANEIRO.pdf', capa: U + '2026/04/INFORMATIVO-JANEIRO.jpg' },
     // PDFs em /arquivos/informativos/<ano>/ (na raiz, fora do build, para não duplicar no repositório) e capas (1ª página) em assets/informativos/capas/
     ...[
       ['2026', [5, 6, 7, 8]],
@@ -204,7 +204,7 @@ module.exports = {
     ].flatMap(([ano, meses]) => meses.map(m => {
       const nome = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'][m - 1];
       const slug = `informativo-${nome.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()}-${ano}`;
-      return { slug, t: `Informativo – ${nome} ${ano}`, ano, ordem: Number(ano) * 100 + m, pdf: `/arquivos/informativos/${ano}/${slug}.pdf`, capa: `/assets/informativos/capas/${slug}.jpg` };
+      return { slug, t: `Informativo ${nome} ${ano}`, ano, ordem: Number(ano) * 100 + m, pdf: `/arquivos/informativos/${ano}/${slug}.pdf`, capa: `/assets/informativos/capas/${slug}.jpg` };
     })),
   ],
 
@@ -246,9 +246,9 @@ module.exports = {
         { h: 'Olhe, Ouça e Sinta: a marca pelos sentidos' },
         'A metodologia da Plimper orientou todo o projeto a partir da percepção.',
         { ul: [
-          'Olhe — A origem é o primeiro contato visual. O Pico dos Pontões e o coração formam um símbolo que une território, cooperativismo e cuidado. Simples, direto e carregado de significado.',
-          'Ouça — O som da marca é o da cooperação, é a troca constante entre mais de 260 cooperados. O movimento das fitas traduz esse fluxo vivo de relações, onde nada é isolado e tudo se conecta.',
-          'Sinta — A Colamisul transmite cuidado real. A sensação é de produto feito com tempo, responsabilidade e compromisso. A identidade visual reforça segurança e humanidade, mostrando que há pessoas de verdade por trás de cada etapa.',
+          'Olhe: a origem é o primeiro contato visual. O Pico dos Pontões e o coração formam um símbolo que une território, cooperativismo e cuidado. Simples, direto e carregado de significado.',
+          'Ouça: o som da marca é o da cooperação, é a troca constante entre mais de 260 cooperados. O movimento das fitas traduz esse fluxo vivo de relações, onde nada é isolado e tudo se conecta.',
+          'Sinta: a Colamisul transmite cuidado real. A sensação é de produto feito com tempo, responsabilidade e compromisso. A identidade visual reforça segurança e humanidade, mostrando que há pessoas de verdade por trás de cada etapa.',
         ] },
         { img: '/assets/img/noticias/qualidade-que-vem-do-coracao/manteiga.webp', alt: 'Criança com a Manteiga Dourada Colamisul' },
         { h: 'Digital que aproxima' },

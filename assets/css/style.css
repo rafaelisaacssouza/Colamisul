@@ -72,8 +72,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .display-m  { font-size: clamp(1.75rem, 3.2vw, 2.75rem); }
 .display-s  { font-size: clamp(1.35rem, 2vw, 1.75rem); }
 .t-green { color: var(--green); } .t-lime { color: var(--lime-ink); } .t-white { color: #fff; } .t-yellow { color: var(--yellow); }
-.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 18px; }
-.eyebrow::before { content: ''; width: 28px; height: 3px; border-radius: 3px; background: currentColor; }
+.eyebrow { display: inline-flex; align-items: center; font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 18px; }
 .eyebrow.on-dark { color: var(--yellow); }
 .lead { font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.6; color: var(--ink-2); }
 .prose p { color: var(--ink-2); }
@@ -218,6 +217,7 @@ a.card:hover .card__media img { transform: scale(1.05); }
 .media-frame img { width: 100%; height: 100%; object-fit: cover; }
 .media-frame--tall { aspect-ratio: 4 / 5; }
 .media-frame--wide { aspect-ratio: 16 / 10; }
+.media-frame--top img { object-position: 50% 12%; } /* mantém a cabeça da pessoa dentro do quadro */
 
 .quote-band { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.4rem); line-height: 1.2; color: var(--green); }
 
@@ -267,7 +267,7 @@ a.card:hover .card__media img { transform: scale(1.05); }
 .president figcaption { margin-top: 12px; font-weight: 700; font-size: .92rem; line-height: 1.3; }
 
 /* Presidentes: diretoria executiva e conselhos */
-.board-group { margin: 0 0 20px; font-family: var(--font-body); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.board-group { margin: 0 0 48px; font-family: var(--font-body); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
 .board-person { margin: 0; text-align: center; }
 .board-person .photo { max-width: 260px; margin: 0 auto; aspect-ratio: 5 / 6; border-radius: var(--radius); overflow: hidden; background: var(--cream); box-shadow: var(--shadow); }
 .board-person .photo img { width: 100%; height: 100%; object-fit: cover; }
@@ -519,7 +519,6 @@ body:has(main > :last-child.bg-green) { --footer-wave-bg: var(--green); }
 /* Home: bloco Sustentabilidade só com texto, centralizado */
 .sust-intro { text-align: center; }
 .sust-intro .lead { margin-inline: auto; max-width: 60ch; }
-.sust-intro .eyebrow::after { content: ''; width: 28px; height: 3px; border-radius: 3px; background: currentColor; }
 
 /* ---------- Nossa história: ata de fundação (painel branco, só as folhas) ---------- */
 .museum { --fh: clamp(220px, calc(100svh - var(--header-h) - 230px), 520px); /* altura da folha */
