@@ -246,7 +246,13 @@
     const frames = $$('.museum__frame', museum);
     let st = null; // ScrollTrigger enquanto a seção está presa (desktop)
     const dist = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
-    const setBar = p => { if (bar) bar.style.transform = `scaleX(${p})`; };
+    const nextBtn = $('[data-museum-next]', museum);
+    let prog = 0; // 0 a 1: quanto da faixa já passou
+    const setBar = p => {
+      prog = p;
+      if (bar) bar.style.transform = `scaleX(${p})`;
+      if (nextBtn) nextBtn.classList.toggle('is-end', p > .98); // na última folha a seta some
+    };
 
     // Desktop: o painel fica preso (sticky) ao lado do texto e as folhas passam enquanto o texto rola.
     // Timeline com o topo do painel como gatilho: começa quando o painel chega na linha do sticky
@@ -307,6 +313,21 @@
     });
     // Soltar depois de arrastar não abre a ampliação
     viewport.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+
+    // Seta: leva até a próxima folha (rolando a página quando o painel está preso, ou a faixa no celular)
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+      const d = st ? dist() : viewport.scrollWidth - viewport.clientWidth;
+      if (!d) return;
+      const now = prog * d;
+      const alvo = frames
+        .map(f => { const it = f.parentElement; return it.offsetLeft + it.offsetWidth / 2 - viewport.clientWidth / 2; })
+        .find(o => o > now + 8);
+      const p = alvo === undefined ? 1 : Math.min(1, alvo / d);
+      if (st) {
+        const y = st.start + p * (st.end - st.start);
+        if (lenis) lenis.scrollTo(y, { duration: .9 }); else window.scrollTo({ top: y, behavior: 'smooth' });
+      } else viewport.scrollTo({ left: p * d, behavior: 'smooth' });
+    });
 
     // Teclado: ao focar uma folha fora da tela, a rolagem leva até ela
     frames.forEach(f => f.addEventListener('focus', () => {

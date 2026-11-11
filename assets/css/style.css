@@ -543,6 +543,17 @@ body:has(main > :last-child.bg-green) { --footer-wave-bg: var(--green); }
 .museum__frame:hover { transform: translateY(-4px); }
 .museum__frame:focus-visible { outline: 2px solid var(--green); outline-offset: 6px; }
 
+/* palco = faixa das folhas + seta; flow-root evita que as margens negativas da faixa vazem */
+.museum__stage { position: relative; display: flow-root; }
+/* seta à direita, no meio da altura da folha */
+.museum__next { position: absolute; z-index: 2; right: clamp(8px, 1.5vw, 16px); top: calc(var(--fh) / 2); transform: translateY(-50%);
+  display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 50%;
+  background: #fff; color: var(--green); box-shadow: var(--shadow); cursor: pointer;
+  transition: background .2s ease, color .2s ease, opacity .25s ease, visibility .25s; }
+.museum__next svg { width: 22px; height: 22px; }
+.museum__next:hover { background: var(--green); color: #fff; }
+.museum__next:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.museum__next.is-end { opacity: 0; visibility: hidden; }
 .museum__foot { display: flex; justify-content: center; padding-inline: clamp(20px, 3vw, 32px); }
 .museum__progress { flex: 0 1 220px; height: 2px; border-radius: 2px; background: rgba(0, 0, 0, .08); overflow: hidden; }
 .museum__progress span { display: block; height: 100%; background: rgba(0, 0, 0, .35); transform: scaleX(0); transform-origin: left; }

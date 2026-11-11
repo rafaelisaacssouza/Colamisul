@@ -308,6 +308,7 @@ const instagramBand = () => `<section class="section--tight"><div class="contain
 const museuAtas = () => `<section class="museum" data-museum aria-labelledby="museu-titulo">
   <div class="museum__pin">
     <h2 id="museu-titulo" class="sr-only">Ata de fundação</h2>
+    <div class="museum__stage">
     <div class="museum__viewport" data-museum-viewport>
       <ol class="museum__track" data-museum-track>${D.atas.map((a, i) => `
         <li class="museum__item">
@@ -316,6 +317,8 @@ const museuAtas = () => `<section class="museum" data-museum aria-labelledby="mu
           </button>
         </li>`).join('')}
       </ol>
+    </div>
+    <button class="museum__next" type="button" data-museum-next aria-label="Próxima folha da ata">${I.arrow}</button>
     </div>
     <div class="museum__foot">
       <div class="museum__progress" aria-hidden="true"><span data-museum-progress></span></div>
